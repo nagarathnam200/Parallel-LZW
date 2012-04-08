@@ -1,6 +1,7 @@
 #include <string.h>
 #include <iostream>
 #include <fstream>
+#include <omp.h>
 
 #include "dictionary.h"
 
@@ -79,6 +80,7 @@ int main(int argc, char **argv)
 			case 'p':
 				{
 					numOfProcs = atoi(optarg);
+					omp_set_num_threads(numOfProcs);
 					break;
 				}
 			case 'i':
@@ -113,46 +115,48 @@ int main(int argc, char **argv)
 
 	int load = data.length();
 
-	int perProcessor = load/numOfProcs;
+	int perProcessor = load;
+	
+	if(numOfProcs > 0) {
+		
+		perProcessor = load/numOfProcs;
+
+	}
 
 	int count =0;
 
 	int k  =0;
 
-	vector<int> compressed;
+	vector<int> res[MAXPROCS];
 
 //	cout<<endl<<"The Load is "<<load;
-	for(count = 0;count < load;count +=perProcessor) {
+	#pragma omp parallel firstprivate(data, count,perProcessor)
+		{
+
+			#pragma omp for lastprivate(k)
+			for(count = 0;count < load;count +=perProcessor) {
 
 //		cout<<endl<<"For Processor: "<<k;
 //		cout<<endl<<"Count Starts at : "<<count;
-		vector<int> res = compressData(data, count, count+perProcessor-1,k);
+				k = count/perProcessor;
+				res[k] = compressData(data, count, count+perProcessor-1,k);
+//				#pragma omp critical 
+
+			}
+	    }
+		
 		int i;
+		int j;
 
-    	for(i=0;i<res.size();i++) {
+		#pragma omp barrier
+		k+=1;
+		for(j=0;j<k;j++) {
+	
+			for(i=0;i<res[j].size();i++) {
+					cout<<res[j][i]<<" ";
+			}
 
-			compressed.push_back(res[i]);
-
-        //	cout<<endl<<res[i];
-
-    	}
-
-		compressed.push_back(-1);
-
-//		if(k == 2) {	d[k].print(0);}
-
-		k++;
-
-	}
-
-	int i;
-	for(i=0;i<compressed.size();i++) {
-		if(compressed[i] == -1) {
 			cout<<endl;
-		} else {
-			cout<<compressed[i]<<" ";
+
 		}
-	}
-
 }
-
