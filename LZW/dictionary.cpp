@@ -12,7 +12,7 @@ dictionary::dictionary() {
 }
 void dictionary::add(string key, int value) {
 
-	if(dict.size() == 500) {
+	if(dict.size() == 10000) {
 		return;
 	}
 	dict[key] = value;
@@ -21,7 +21,7 @@ void dictionary::add(string key, int value) {
 
 void dictionary::addNum(int key, string value) {
 
-	 if(decode.size() == 500) {
+	 if(decode.size() == 10000) {
         return;
     }
 
