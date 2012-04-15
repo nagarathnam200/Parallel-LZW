@@ -2,17 +2,30 @@
 #include <stdlib.h>
 #include <time.h>
 
+#define SIZE 10000
+
+#define PROCS 2
+
 int main() {
 
 	FILE *fp;
-	fp = fopen("testData","w");
+	fp = fopen("testData","wb");
 	srand(time(NULL));
 	long int i=0;
 
-	for(i=0; i<10000000; i++) {
-		fputc((rand() % 4) + 97, fp);
+	int size = SIZE;
+	int procs = PROCS;
+
+	fwrite(&size, sizeof(int), 1, fp);
+
+	fwrite(&procs, sizeof(int), 1, fp);
+
+	for(i=0; i<SIZE; i++) {
+	
+		char c = (rand() % 4) + 97;
+		
+		fwrite(&c, sizeof(char), 1, fp);
 	}
-	fputc('\n', fp);
 	fclose(fp);
 	return 0;
 }

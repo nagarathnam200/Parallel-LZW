@@ -1,14 +1,13 @@
 #include "dictionary.h"
 
 dictionary::dictionary() {
-	decode[0] = "a";
-	decode[1] = "b";
-	decode[2] = "c";
-	decode[3] = "d";
-	dict["a"] = 0;
-	dict["b"] = 1;
-	dict["c"] = 2;
-	dict["d"] = 3;
+
+	int i;
+
+	for(i=0;i<COUNT;i++) {
+		decode[i].append(1,(char)(97+i));
+		dict[decode[i]] = i;
+	}
 }
 void dictionary::add(string key, int value) {
 

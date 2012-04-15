@@ -9,6 +9,7 @@
 #include <fcntl.h>
 #include <sys/time.h>
 
+#define COUNT 5
 using namespace std;
 
 class dictionary {

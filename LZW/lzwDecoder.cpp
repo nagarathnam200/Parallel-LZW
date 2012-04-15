@@ -9,7 +9,7 @@
 dictionary d[MAX_PROCS];
 
 
-int counter = 5;
+int counter = COUNT;
 string deCompress(string str) {
 
 	static int dicCount = -1;
@@ -17,28 +17,28 @@ string deCompress(string str) {
 
 	dicCount++;
 
-	istringstream iss(str, istringstream::in);
+	int ctr = 0;
 
-	int num;
+	char num;
 
 	char ch;
 
 	string entry;
 
-	int prevcode, currentcode;
+	char prevcode, currentcode;
 
-	iss >> prevcode;
+	prevcode = str[ctr++];
 
-	cout<<d[dicCount].retriveStr(prevcode);
+	cout<<d[dicCount].retriveStr((int)prevcode);
 
-	while(iss >> num) {
+	while((num = str[ctr++]) != -1) {
 		currentcode = num;
 
-		string s = d[dicCount].retriveStr(currentcode);
+		string s = d[dicCount].retriveStr((int)currentcode);
 
 		if(s.empty()) {
 
-			string dest = d[dicCount].retriveStr(prevcode);
+			string dest = d[dicCount].retriveStr((int)prevcode);
 
 			dest.append(1,dest[0]);
 
@@ -56,8 +56,9 @@ string deCompress(string str) {
 			
 			ch = s[0];
 
+//			cout<<endl <<"For count "<<counter<<" String: "<< d[dicCount].retriveStr((int)prevcode) << " Character "<<ch<<" PrevCode "<<(int)prevcode<<" Current "<<(int)currentcode;
 			d[dicCount].addNum(counter++, 
-								d[dicCount].retriveStr(prevcode).append(1,ch));
+								d[dicCount].retriveStr((int)prevcode).append(1,ch));
 
 			prevcode = currentcode;
 		}
@@ -74,6 +75,8 @@ int main(int argc, char **argv) {
 	char *Data;
 
 	ifstream infile;
+
+	char input[30];
 	
 	int lSize;
 
@@ -88,8 +91,7 @@ int main(int argc, char **argv) {
             case 'i':
                 {
 
-					infile.open(optarg, ifstream::in);
-
+					strcpy(input, optarg);
                     break;
 
                 }
@@ -107,11 +109,48 @@ int main(int argc, char **argv) {
         }
     }
 
-	string line;
-	while(getline(infile,line)) {
+	FILE *fp;
+
+	fp = fopen(input, "rb");
+
+	int size;	
+
+	fread(&size, sizeof(int), 1, fp);
+
+	int procs;
+
+	fread(&procs, sizeof(int), 1, fp);
+
+	int i;
+
+	for(i=0;i<numOfProcs;i++) {
+
+		string line;
+
+		char c;
+
+		fread(&c, sizeof(char), 1, fp);
+
+//		printf("%d ",c);
+
+		while(c != (char)255) {
+
+			line.append(1,c);
+
+			fread(&c, sizeof(char), 1, fp);
+
+//			printf("%d ", c);
+
+		}
+
+		line.append(1,c);
+
 		deCompress(line);		
-		counter = 5;
+		counter = COUNT;
 	}
 	cout<<endl;
-//	d[2].print(5);
+
+	fclose(fp);
+
+//	d[0].print(1);
 }

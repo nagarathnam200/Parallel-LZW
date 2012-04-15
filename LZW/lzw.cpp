@@ -2,10 +2,10 @@
 #include <iostream>
 #include <fstream>
 #include <omp.h>
+#include "util.h"
 
 #include "dictionary.h"
 
-#define COUNT 5
 #define LOWERA 97
 #define MAXPROCS 256
 using namespace std;
@@ -13,14 +13,6 @@ using namespace std;
 dictionary d[MAXPROCS];
 
 vector<int> compressData(string source, int start, int end, int proc) {
-
-	int length = source.length();
-
-	if(end > length) {
-
-		end = length-1;
-
-	}
 
 	vector<int> result;
 
@@ -71,7 +63,11 @@ int main(int argc, char **argv)
 
 	int opt;
 	
-	int numOfProcs = 0;
+	int numOfProcs = 1;
+
+	char filename[30];
+
+	char outfile[30] = "out";
 	
 
 	while((opt = getopt(argc, argv, "p:i:o:")) != -1) {
@@ -85,78 +81,65 @@ int main(int argc, char **argv)
 				}
 			case 'i':
 				{
-					 if (dup2(open(optarg, O_RDONLY), STDIN_FILENO) < 0)
-                		{
-                   			 perror("");
-		                     exit(0);
-         		        }
-
+					strcpy(filename,optarg);
                 	break;
 
 				}
 			case 'o':
             {
-                if (dup2(open(optarg, O_CREAT | O_WRONLY, 0644), STDOUT_FILENO) < 0)
-                {
-                    perror("");
-                    exit(EXIT_FAILURE);
-                }
-
+				strcpy(outfile, optarg);
                 break;
             }
 
 		}
 	}
-	string data;
 
-	cin>>data;
+	int size = readSize(filename);
 
-
-
-	int load = data.length();
-
-	int perProcessor = load;
-	
-	if(numOfProcs > 0) {
-		
-		perProcessor = load/numOfProcs;
-
-	}
-
-	int count =0;
-
-	int k  =0;
+	int i;
 
 	vector<int> res[MAXPROCS];
 
-//	cout<<endl<<"The Load is "<<load;
-	#pragma omp parallel firstprivate(data, count,perProcessor)
-		{
 
-			#pragma omp for lastprivate(k)
-			for(count = 0;count < load;count +=perProcessor) {
 
-//		cout<<endl<<"For Processor: "<<k;
-//		cout<<endl<<"Count Starts at : "<<count;
-				k = count/perProcessor;
-				res[k] = compressData(data, count, count+perProcessor-1,k);
-//				#pragma omp critical 
+	#pragma omp parallel for firstprivate(filename, size, numOfProcs)
+	for(i=0;i<numOfProcs;i++) {
 
-			}
-	    }
-		
-		int i;
-		int j;
+		char *data = (char *)malloc(sizeof(char) * (size/numOfProcs));
 
-		#pragma omp barrier
-		k+=1;
-		for(j=0;j<k;j++) {
-	
-			for(i=0;i<res[j].size();i++) {
-					cout<<res[j][i]<<" ";
-			}
+		readChunk(data, filename, (i+1));
 
-			cout<<endl;
+		string str(data);
 
-		}
+		res[i] = compressData(str, 0, str.length(), i);
+
+	}
+
+    int j;
+
+	FILE *fp;
+
+	fp = fopen(outfile, "wb");
+
+	fwrite(&size, sizeof(int), 1, fp);
+
+	fwrite(&numOfProcs, sizeof(int), 1, fp);
+
+    for(j=0;j<numOfProcs;j++) {
+
+        for(i=0;i<res[j].size();i++) {
+
+			char c1 = res[j][i];
+
+			fwrite(&c1, sizeof(char), 1, fp);
+
+        }
+
+		char c = (char)255;
+
+		fwrite(&c, sizeof(char), 1, fp);
+
+    }
+
+	fclose(fp);
 }
