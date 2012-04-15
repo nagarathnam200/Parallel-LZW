@@ -100,7 +100,11 @@ int main(int argc, char **argv)
 
 	vector<int> res[MAXPROCS];
 
+
+
+	#pragma omp parallel for firstprivate(filename, size, numOfProcs)
 	for(i=0;i<numOfProcs;i++) {
+
 		char *data = (char *)malloc(sizeof(char) * (size/numOfProcs));
 
 		readChunk(data, filename, (i+1));
@@ -129,23 +133,13 @@ int main(int argc, char **argv)
 
 			fwrite(&c1, sizeof(char), 1, fp);
 
-//			printf("%d ",c1);
-        
         }
 
 		char c = (char)255;
 
 		fwrite(&c, sizeof(char), 1, fp);
 
-//		printf("\n");
-
     }
 
 	fclose(fp);
-
-//	cout<<endl<<"Dictionary 1:";
-
-//	d[0].print(0);
-
-
 }
