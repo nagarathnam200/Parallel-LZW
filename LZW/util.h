@@ -9,5 +9,5 @@
 #include <fcntl.h>
 #include <sys/time.h>
 
-int readSize(char *filename);
+long int readSize(char *filename);
 int readChunk(void *dest, char *filename, int chunkNum);

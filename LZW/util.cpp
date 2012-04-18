@@ -1,12 +1,12 @@
 #include "util.h"
-int readSize(char *filename) {
+long int readSize(char *filename) {
 	FILE *fp;
 	
 	fp = fopen(filename, "rb");
 
-	int size;
+	long int size;
 
-	fread(&size, sizeof(int), 1, fp);
+	fread(&size, sizeof(long int), 1, fp);
 
 	fclose(fp);
 
@@ -18,9 +18,9 @@ int readChunk(void *dest, char *filename, int chunkNum) {
 
 	fp = fopen(filename, "rb");
 
-	int size = -1;
+	long int size = -1;
 
-	fread(&size, sizeof(int), 1, fp);
+	fread(&size, sizeof(long int), 1, fp);
 
 	if((size == -1) || (size == 0)) {
 		
@@ -40,7 +40,7 @@ int readChunk(void *dest, char *filename, int chunkNum) {
 		return 0;
 	}
 
-	int len = size/procs;
+	long int len = size/procs;
 
 	fseek(fp, (len * (chunkNum-1)), SEEK_CUR);
 

@@ -94,7 +94,7 @@ int main(int argc, char **argv)
 		}
 	}
 
-	int size = readSize(filename);
+    long int size = readSize(filename);
 
 	int i;
 
@@ -121,7 +121,7 @@ int main(int argc, char **argv)
 
 	fp = fopen(outfile, "wb");
 
-	fwrite(&size, sizeof(int), 1, fp);
+	fwrite(&size, sizeof(long int), 1, fp);
 
 	fwrite(&numOfProcs, sizeof(int), 1, fp);
 
@@ -133,13 +133,18 @@ int main(int argc, char **argv)
 
 			fwrite(&c1, sizeof(char), 1, fp);
 
+			printf("%d ",c1);
+
         }
 
 		char c = (char)255;
 
 		fwrite(&c, sizeof(char), 1, fp);
 
+		printf("%d ",c);
+
     }
 
+	d[1].print(0);
 	fclose(fp);
 }

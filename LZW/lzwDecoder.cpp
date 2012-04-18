@@ -113,13 +113,18 @@ int main(int argc, char **argv) {
 
 	fp = fopen(input, "rb");
 
-	int size;	
+	long int size;	
 
-	fread(&size, sizeof(int), 1, fp);
+	fread(&size, sizeof(long int), 1, fp);
+
+    fwrite(&size, sizeof(long int), 1, stdout);	
 
 	int procs;
 
 	fread(&procs, sizeof(int), 1, fp);
+
+	fwrite(&procs, sizeof(int), 1, stdout);
+
 
 	int i;
 
@@ -148,7 +153,6 @@ int main(int argc, char **argv) {
 		deCompress(line);		
 		counter = COUNT;
 	}
-	cout<<endl;
 
 	fclose(fp);
 

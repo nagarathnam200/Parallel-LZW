@@ -2,9 +2,9 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define SIZE 10000
+#define SIZE 32
 
-#define PROCS 2
+#define PROCS 4
 
 int main() {
 
@@ -13,18 +13,31 @@ int main() {
 	srand(time(NULL));
 	long int i=0;
 
-	int size = SIZE;
+	long int size = SIZE;
+
+	size*=SIZE;
+
+	size*=1024;
+
 	int procs = PROCS;
 
-	fwrite(&size, sizeof(int), 1, fp);
+	fwrite(&size, sizeof(long int), 1, fp);
 
 	fwrite(&procs, sizeof(int), 1, fp);
 
-	for(i=0; i<SIZE; i++) {
-	
-		char c = (rand() % 4) + 97;
+
+	int k = 0;
+	for(k=0; k<1024; k++) {//500 MB
+		for(i=0; i<SIZE; i++) {// 1MB
 		
-		fwrite(&c, sizeof(char), 1, fp);
+			int j;
+
+			for(j=0; j<SIZE; j++) { //1kB
+				char c = (rand() % 4) + 97;
+			
+				fwrite(&c, sizeof(char), 1, fp);
+			}
+		}
 	}
 	fclose(fp);
 	return 0;
