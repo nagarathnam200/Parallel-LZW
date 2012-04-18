@@ -12,6 +12,14 @@ using namespace std;
 
 dictionary d[MAXPROCS];
 
+double gettime()
+{
+    struct timeval tv;
+    gettimeofday(&tv, NULL);
+    return tv.tv_sec + tv.tv_usec / 1000000.0;
+}
+
+
 vector<int> compressData(string source, int start, int end, int proc) {
 
 	vector<int> result;
@@ -100,7 +108,7 @@ int main(int argc, char **argv)
 
 	vector<int> res[MAXPROCS];
 
-
+	double start = gettime();
 
 	#pragma omp parallel for firstprivate(filename, size, numOfProcs)
 	for(i=0;i<numOfProcs;i++) {
@@ -133,7 +141,7 @@ int main(int argc, char **argv)
 
 			fwrite(&c1, sizeof(char), 1, fp);
 
-			printf("%d ",c1);
+//			printf("%d ",c1);
 
         }
 
@@ -141,10 +149,14 @@ int main(int argc, char **argv)
 
 		fwrite(&c, sizeof(char), 1, fp);
 
-		printf("%d ",c);
+//		printf("%d ",c);
 
     }
 
-	d[1].print(0);
+//	d[1].print(0);
+
+	double end = gettime();
+
+	cout<<endl<<"The total Time taken is : "<<end - start;
 	fclose(fp);
 }

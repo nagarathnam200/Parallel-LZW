@@ -4,12 +4,12 @@
 
 #define SIZE 32
 
-#define PROCS 4
+#define PROCS 8 
 
 int main() {
 
 	FILE *fp;
-	fp = fopen("testData","wb");
+	fp = fopen("testData8","wb");
 	srand(time(NULL));
 	long int i=0;
 
