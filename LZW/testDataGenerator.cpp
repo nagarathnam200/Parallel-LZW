@@ -2,14 +2,21 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define SIZE 32
+#define SIZE 1024
 
-#define PROCS 8 
+#define PROCS 2 
 
 int main() {
 
-	FILE *fp;
-	fp = fopen("testData8","wb");
+	FILE *fp[5];
+
+	fp[0] = fopen("testData1","wb");
+	fp[1] = fopen("testData2","wb");
+	fp[2] = fopen("testData4","wb");
+	fp[3] = fopen("testData8","wb");
+	fp[4] = fopen("testData16","wb");
+
+
 	srand(time(NULL));
 	long int i=0;
 
@@ -17,29 +24,60 @@ int main() {
 
 	size*=SIZE;
 
-	size*=1024;
+	size*=50;
 
-	int procs = PROCS;
+	int procs = 1;
 
-	fwrite(&size, sizeof(long int), 1, fp);
+	int count = 0;
 
-	fwrite(&procs, sizeof(int), 1, fp);
+	for(count = 0; count < 5; count++) {
+
+		fwrite(&size, sizeof(long int), 1, fp[count]);
+
+		
+
+	}
+
+	    fwrite(&procs, sizeof(int), 1, fp[0]);
+
+		procs = 2;
+
+		fwrite(&procs, sizeof(int), 1, fp[1]);
+
+		procs = 4;
+
+		fwrite(&procs, sizeof(int), 1, fp[2]);
+
+		procs = 8;
+
+		fwrite(&procs, sizeof(int), 1, fp[3]);
+
+		procs = 16;
+
+		fwrite(&procs, sizeof(int), 1, fp[4]);
 
 
 	int k = 0;
-	for(k=0; k<1024; k++) {//500 MB
+	for(k=0; k<50; k++) {//50 MB
 		for(i=0; i<SIZE; i++) {// 1MB
 		
 			int j;
 
 			for(j=0; j<SIZE; j++) { //1kB
 				char c = (rand() % 4) + 97;
-			
-				fwrite(&c, sizeof(char), 1, fp);
+				int m = 0;
+				for(m=0; m<5; m++) {
+
+					fwrite(&c, sizeof(char), 1, fp[m]);
+
+				}
 			}
 		}
 	}
-	fclose(fp);
+	int m = 0;
+    for(m=0; m<5; m++) {
+		fclose(fp[m]);
+	}
 	return 0;
 }
 

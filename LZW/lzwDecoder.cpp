@@ -2,6 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <vector>
 #include "dictionary.h"
 
 #define MAX_PROCS 256
@@ -10,7 +11,7 @@ dictionary d[MAX_PROCS];
 
 
 int counter = COUNT;
-string deCompress(string str) {
+string deCompress(vector<int> str) {
 
 	static int dicCount = -1;
 	
@@ -25,7 +26,7 @@ string deCompress(string str) {
 
 	string entry;
 
-	char prevcode, currentcode;
+	int prevcode, currentcode;
 
 	prevcode = str[ctr++];
 
@@ -64,7 +65,7 @@ string deCompress(string str) {
 		}
 	}
 
-	return str;
+	return "sdfds";
 }
 
 int main(int argc, char **argv) {
@@ -130,25 +131,25 @@ int main(int argc, char **argv) {
 
 	for(i=0;i<numOfProcs;i++) {
 
-		string line;
+		vector<int> line;
 
-		char c;
+		int c;
 
-		fread(&c, sizeof(char), 1, fp);
+		fread(&c, sizeof(int), 1, fp);
 
 //		printf("%d ",c);
 
-		while(c != (char)255) {
+		while(c != -1) {
 
-			line.append(1,c);
+			line.push_back(c);
 
-			fread(&c, sizeof(char), 1, fp);
+			fread(&c, sizeof(int), 1, fp);
 
 //			printf("%d ", c);
 
 		}
 
-		line.append(1,c);
+		line.push_back(c);
 
 		deCompress(line);		
 		counter = COUNT;

@@ -101,7 +101,7 @@ int main(int argc, char **argv)
 
 		}
 	}
-
+	strcat(outfile, filename);
     long int size = readSize(filename);
 
 	int i;
@@ -123,6 +123,8 @@ int main(int argc, char **argv)
 
 	}
 
+	double endCompute = gettime();
+
     int j;
 
 	FILE *fp;
@@ -137,17 +139,17 @@ int main(int argc, char **argv)
 
         for(i=0;i<res[j].size();i++) {
 
-			char c1 = res[j][i];
+			int c1 = res[j][i];
 
-			fwrite(&c1, sizeof(char), 1, fp);
+			fwrite(&c1, sizeof(int), 1, fp);
 
 //			printf("%d ",c1);
 
         }
 
-		char c = (char)255;
+		int c = -1;
 
-		fwrite(&c, sizeof(char), 1, fp);
+		fwrite(&c, sizeof(int), 1, fp);
 
 //		printf("%d ",c);
 
@@ -157,6 +159,9 @@ int main(int argc, char **argv)
 
 	double end = gettime();
 
+	cout<<endl<<"Total Number of Procs: "<<numOfProcs;
 	cout<<endl<<"The total Time taken is : "<<end - start;
+	cout<<endl<<"The total Time taken for Computation is: "<<endCompute - start;
+	
 	fclose(fp);
 }

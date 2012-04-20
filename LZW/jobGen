@@ -1,0 +1,30 @@
+#!/bin/csh
+#PBS -l ncpus=16
+#PBS -l walltime=5:00
+#PBS -j oe
+#PBS -q pri_3
+
+set echo
+
+ja
+
+cd $SCRATCH
+
+cp $HOME/15418/Parallel-LZW/LZW/lzw .
+cp $HOME/15418/Parallel-LZW/LZW/tg .
+
+./tg
+
+setenv OMP_NUM_THREADS $PBS_NCPUS
+
+		omplace -nt $OMP_NUM_THREADS ./lzw -p 1 -i testData1
+
+		omplace -nt $OMP_NUM_THREADS ./lzw -p 2 -i testData2
+
+		omplace -nt $OMP_NUM_THREADS ./lzw -p 4 -i testData4 
+
+		omplace -nt $OMP_NUM_THREADS ./lzw -p 8 -i testData8
+
+		omplace -nt $OMP_NUM_THREADS ./lzw -p 16 -i testData16
+
+ja -chlst

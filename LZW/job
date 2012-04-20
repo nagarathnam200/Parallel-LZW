@@ -11,13 +11,16 @@ ja
 cd $SCRATCH
 
 cp $HOME/15418/Parallel-LZW/LZW/lzw .
+cp $HOME/15418/Parallel-LZW/LZW/testData4 .
+cp $HOME/15418/Parallel-LZW/LZW/testData8 .
+cp $HOME/15418/Parallel-LZW/LZW/testData16 .
 
 setenv OMP_NUM_THREADS $PBS_NCPUS
 
-		omplace -nt $OMP_NUM_THREADS ./lzw -p 4 -i $HOME/15418/Parallel-LZW/LZW/testData4 
+		omplace -nt $OMP_NUM_THREADS ./lzw -p 4 -i testData4 
 
-		omplace -nt $OMP_NUM_THREADS ./lzw -p 8 -i $HOME/15418/Parallel-LZW/LZW/testData8
+		omplace -nt $OMP_NUM_THREADS ./lzw -p 8 -i testData8
 
-		omplace -nt $OMP_NUM_THREADS ./lzw -p 16 -i $HOME/15418/Parallel-LZW/LZW/testData16
+		omplace -nt $OMP_NUM_THREADS ./lzw -p 16 -i testData16
 
 ja -chlst
