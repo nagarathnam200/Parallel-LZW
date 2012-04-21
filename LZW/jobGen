@@ -2,7 +2,7 @@
 #PBS -l ncpus=16
 #PBS -l walltime=5:00
 #PBS -j oe
-#PBS -q pri_3
+#PBS -q debug
 
 set echo
 

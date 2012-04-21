@@ -110,7 +110,9 @@ int main(int argc, char **argv)
 
 	double start = gettime();
 
-	#pragma omp parallel for firstprivate(filename, size, numOfProcs)
+	double diff = 0;
+
+	#pragma omp parallel for firstprivate(filename, size, numOfProcs) lastprivate(diff)
 	for(i=0;i<numOfProcs;i++) {
 
 		char *data = (char *)malloc(sizeof(char) * (size/numOfProcs));
@@ -119,11 +121,14 @@ int main(int argc, char **argv)
 
 		string str(data);
 
+		double s = gettime();
 		res[i] = compressData(str, 0, str.length(), i);
+		double r = gettime();
+
+		diff+=(r-s);
 
 	}
 
-	double endCompute = gettime();
 
     int j;
 
@@ -161,7 +166,7 @@ int main(int argc, char **argv)
 
 	cout<<endl<<"Total Number of Procs: "<<numOfProcs;
 	cout<<endl<<"The total Time taken is : "<<end - start;
-	cout<<endl<<"The total Time taken for Computation is: "<<endCompute - start;
+	cout<<endl<<"The total Time taken for Computation is: "<<diff;
 	
 	fclose(fp);
 }
