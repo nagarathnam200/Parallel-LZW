@@ -13,10 +13,12 @@
 #define COUNT 5
 using namespace std;
 
-vector < map<string, int> > hashTable::dict(500);
-vector < map<int, string> > hashTable::decode(500);
+hashTable::hashTable(): dict(500),decode(500) {
 
+}
 void hashTable::add(string key, int value) {
+
+	if(value > 1000) return;
 
 	int i=0;
 
@@ -32,15 +34,17 @@ void hashTable::add(string key, int value) {
 
 	dict[pos][key] =  value;
 
+	
+
 }
 
-/*void hashTable::addNum(int key, string value) {
+void hashTable::addNum(int key, string value) {
 
 
 	int pos = key % 500;
 
-	decode[pos].insert(key, value);
-}*/
+	decode[pos][key] = value;
+}
 
 int hashTable::retrive(string key) {
 
@@ -65,16 +69,16 @@ int hashTable::retrive(string key) {
 
 }
 	
-/*string hashTable::retriveStr(int key) {
+string hashTable::retriveStr(int key) {
 
-	int pos = value % 500;
+	int pos = key % 500;
 
-	if(decode[pos].find(key) == dict[pos].end()) {
+	if(decode[pos].find(key) == decode[pos].end()) {
 
-			return NULL;
+			return "";
 
 	} else {
 			return decode[pos][key];
 	}
 
-}*/
+}

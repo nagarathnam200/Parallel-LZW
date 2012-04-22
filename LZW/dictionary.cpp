@@ -2,50 +2,41 @@
 
 dictionary::dictionary() {
 
-	int i;
+	ht.add("a",0);
+	ht.add("b",1);
+	ht.add("c",2);
+	ht.add("d",3);
+	ht.add("e",4);
 
-	for(i=0;i<COUNT;i++) {
-		decode[i].append(1,(char)(97+i));
-		dict[decode[i]] = i;
-	}
+	ht.addNum(0,"a");
+	ht.addNum(1,"b");
+	ht.addNum(2,"c");
+	ht.addNum(3,"d");
+	ht.addNum(4,"e");
 }
 void dictionary::add(string key, int value) {
 
-	if(dict.size() == 5000) {
-		return;
-	}
-	dict[key] = value;
+	ht.add(key, value);
 
 }
 
 void dictionary::addNum(int key, string value) {
 
-	 if(decode.size() == 5000) {
-        return;
-    }
-
-	decode[key] = value;
+	ht.addNum(key,value);
 }
 int dictionary::retrive(string key) {
-
-	if(dict.find(key) == dict.end()) {
-		return -1;
-	} else {
-		return dict[key];
-	}
+	
+	return ht.retrive(key);
 
 }
 
 string dictionary:: retriveStr(int key) {
-	if(decode.find(key) == decode.end()) {
-		string s;
-		return s;
-	} else {
-		return decode[key];
-	}
+
+	return ht.retriveStr(key);
+
 }
 
-void dictionary::print(int flag) {
+/*void dictionary::print(int flag) {
 
 	if(flag == 0) {
 		for( map<string, int>::iterator ii=dict.begin(); ii!=dict.end(); ++ii) {
@@ -62,4 +53,4 @@ void dictionary::print(int flag) {
 		}
 
 	}
-}
+}*/

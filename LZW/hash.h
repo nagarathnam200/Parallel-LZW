@@ -8,19 +8,23 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <sys/time.h>
-#include "hash.h"
 
 #define COUNT 5
 using namespace std;
 
-class dictionary {
+class hashTable {
 
-	hashTable ht;
+	vector< map<string, int> > dict;
+    vector< map<int, string> > decode;
+
 
 	public:
-	dictionary();
+
+	hashTable();
+
 	void add(string key, int value);
 	void addNum(int value, string key);
 	int retrive(string key);
 	string retriveStr(int value);
+	void print();
 };

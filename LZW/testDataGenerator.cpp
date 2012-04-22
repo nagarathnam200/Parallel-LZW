@@ -6,6 +6,8 @@
 
 #define PROCS 2 
 
+#define FACTOR 32
+
 int main() {
 
 	FILE *fp[5];
@@ -24,7 +26,7 @@ int main() {
 
 	size*=SIZE;
 
-	size*=50;
+	size*=FACTOR;
 
 	int procs = 1;
 
@@ -58,7 +60,7 @@ int main() {
 
 
 	int k = 0;
-	for(k=0; k<50; k++) {//50 MB
+	for(k=0; k<FACTOR; k++) {//50 MB
 		for(i=0; i<SIZE; i++) {// 1MB
 		
 			int j;

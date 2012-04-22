@@ -41,6 +41,8 @@ vector<int> compressData(string source, int start, int end, int proc) {
 	while(start <= end) {
 		index = d[proc].retrive(temp);
 		if(index == -1) {
+
+//			cout<<endl<<"Added: "<<temp<<" "<<count;
 			d[proc].add(temp, count);
 			count++;
 			result.push_back(prevIndex); 
@@ -159,8 +161,6 @@ int main(int argc, char **argv)
 //		printf("%d ",c);
 
     }
-
-//	d[1].print(0);
 
 	double end = gettime();
 
