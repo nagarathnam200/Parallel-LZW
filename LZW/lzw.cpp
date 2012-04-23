@@ -53,7 +53,7 @@ vector<int> compressData(string source, int start, int end, int proc) {
 			start++;
 			prevIndex = index;
 			
-			if(start >= end) {
+			if(start == end) {
 				index = d[proc].retrive(temp);
 				if(index == -1) {
 					result.push_back(prevIndex);
@@ -116,7 +116,7 @@ int main(int argc, char **argv)
 
 	double diff = 0;
 
-//	#pragma omp parallel for firstprivate(filename, size, numOfProcs) lastprivate(diff)
+	#pragma omp parallel for firstprivate(filename, size, numOfProcs) lastprivate(diff)
 	for(i=0;i<numOfProcs;i++) {
 
 		char *data = (char *)malloc(sizeof(char) * (size/numOfProcs));
@@ -126,7 +126,7 @@ int main(int argc, char **argv)
 		string str(data);
 
 		double s = gettime();
-		res[i] = compressData(str, 0, str.length()-1, i);
+		res[i] = compressData(str, 0, (size)/numOfProcs, i);
 		double r = gettime();
 
 		diff+=(r-s);

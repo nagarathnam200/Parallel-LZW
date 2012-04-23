@@ -1,0 +1,14 @@
+module: Command not found.
+ja
+cd /brashear/nmuthusa
+cp /usr/users/4/nmuthusa/15418/Parallel-LZW/LZW/lzw .
+cp /usr/users/4/nmuthusa/15418/Parallel-LZW/LZW/tg .
+./tg
+setenv OMP_NUM_THREADS 16
+omplace -nt 16 ./lzw -p 1 -i testData1
+
+Total Number of Procs: 1
+The total Time taken is : 309.606
+The total Time taken for Computation is: 285.806
+The Element Count is: 1488908omplace -nt 16 ./lzw -p 2 -i testData2
+=>> PBS: job killed: walltime 437 exceeded limit 420
