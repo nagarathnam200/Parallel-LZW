@@ -52,7 +52,8 @@ vector<int> compressData(string source, int start, int end, int proc) {
 			temp.append(source, start, 1);
 			start++;
 			prevIndex = index;
-			if(start > end) {
+			
+			if(start >= end) {
 				index = d[proc].retrive(temp);
 				if(index == -1) {
 					result.push_back(prevIndex);
@@ -60,6 +61,7 @@ vector<int> compressData(string source, int start, int end, int proc) {
 				} else {
 					result.push_back(index);
 				}
+				start++;
 			}
 		}
 
@@ -114,7 +116,7 @@ int main(int argc, char **argv)
 
 	double diff = 0;
 
-	#pragma omp parallel for firstprivate(filename, size, numOfProcs) lastprivate(diff)
+//	#pragma omp parallel for firstprivate(filename, size, numOfProcs) lastprivate(diff)
 	for(i=0;i<numOfProcs;i++) {
 
 		char *data = (char *)malloc(sizeof(char) * (size/numOfProcs));
@@ -124,7 +126,7 @@ int main(int argc, char **argv)
 		string str(data);
 
 		double s = gettime();
-		res[i] = compressData(str, 0, str.length(), i);
+		res[i] = compressData(str, 0, str.length()-1, i);
 		double r = gettime();
 
 		diff+=(r-s);
@@ -136,6 +138,8 @@ int main(int argc, char **argv)
 
 	FILE *fp;
 
+	long int elementCount = 0;
+
 	fp = fopen(outfile, "wb");
 
 	fwrite(&size, sizeof(long int), 1, fp);
@@ -143,6 +147,8 @@ int main(int argc, char **argv)
 	fwrite(&numOfProcs, sizeof(int), 1, fp);
 
     for(j=0;j<numOfProcs;j++) {
+
+		elementCount+=res[j].size();
 
         for(i=0;i<res[j].size();i++) {
 
@@ -167,6 +173,7 @@ int main(int argc, char **argv)
 	cout<<endl<<"Total Number of Procs: "<<numOfProcs;
 	cout<<endl<<"The total Time taken is : "<<end - start;
 	cout<<endl<<"The total Time taken for Computation is: "<<diff;
+	cout<<endl<<"The Element Count is: "<<elementCount;
 	
 	fclose(fp);
 }

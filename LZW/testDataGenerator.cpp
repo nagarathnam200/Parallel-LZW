@@ -2,11 +2,11 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define SIZE 1024
+#define SIZE 10 
 
 #define PROCS 2 
 
-#define FACTOR 32
+#define FACTOR 1
 
 int main() {
 

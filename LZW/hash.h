@@ -10,21 +10,30 @@
 #include <sys/time.h>
 
 #define COUNT 5
+#define SIZE 50000
 using namespace std;
+
+typedef struct __node{
+
+	string str;
+	int worth;
+
+}node;
 
 class hashTable {
 
-	vector< map<string, int> > dict;
-    vector< map<int, string> > decode;
-
+	node dict[SIZE];
+    node decode[SIZE];
+	long int size;
 
 	public:
 
 	hashTable();
 
 	void add(string key, int value);
-	void addNum(int value, string key);
+	void addNum(int key, string value);
 	int retrive(string key);
-	string retriveStr(int value);
+	string retriveStr(int key);
 	void print();
+	long int getSize();
 };
