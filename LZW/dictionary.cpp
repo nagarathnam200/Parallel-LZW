@@ -16,7 +16,7 @@ dictionary::dictionary() {
 }
 void dictionary::add(string key, int value) {
 
-	if(ht.getSize() > 5000) return;
+	if(ht.getSize() > DICSIZE) return;
 	ht.add(key, value);
 
 }

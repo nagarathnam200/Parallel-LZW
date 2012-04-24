@@ -11,6 +11,8 @@
 #include "hash.h"
 
 #define COUNT 5
+
+#define DICSIZE 5000
 using namespace std;
 
 class dictionary {

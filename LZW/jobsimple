@@ -1,0 +1,19 @@
+#!/bin/csh
+#PBS -l ncpus=16
+#PBS -l walltime=7:00
+#PBS -j oe
+#PBS -q debug
+
+set echo
+
+ja
+
+cd $SCRATCH
+
+cp $HOME/15418/Parallel-LZW/LZW/lzw .
+
+setenv OMP_NUM_THREADS $PBS_NCPUS
+
+		omplace -nt $OMP_NUM_THREADS ./lzw -p 1 -i testData1
+
+ja -chlst

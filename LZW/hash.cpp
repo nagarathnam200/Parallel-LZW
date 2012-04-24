@@ -13,7 +13,6 @@
 #define COUNT 5
 #define MAGIC 9999
 
-#define SIZE 50000
 using namespace std;
 
 
@@ -30,15 +29,19 @@ void hashTable::add(string key, int value) {
 
 	for(i=0;i<key.size();i++) {
 	
-		 pos += (i * key[i]); 
+		 pos = (pos << 2) ^ (key[i] & 7); 
 
 	}
 
-    pos = pos % SIZE;
+    pos = (pos * i) % SIZE;
+
+	int temp = pos;
 
 	while(!(dict[pos].str.empty())) {
 
 		pos = (pos + 1) % SIZE;
+
+		if(pos == temp) return;
 	}
 
 	dict[pos].str = key;
@@ -71,15 +74,17 @@ int hashTable::retrive(string key) {
 
 	for(i=0;i<key.size();i++) {
 
-		pos += (i * key[i]);
+         pos = (pos << 2) ^ (key[i] & 7);
 
     }
 
-    pos = pos % SIZE;
+    pos = (pos * i) % SIZE;
 
 	int flag = 0;
 
 	int stop = 0;
+
+	int temp = pos;
 
 	while(!stop) {
 
@@ -90,6 +95,11 @@ int hashTable::retrive(string key) {
 		if((dict[pos].str.compare(key)) != 0) {
 		
 			pos = (pos + 1)	% SIZE;	
+
+			if(pos == temp) {
+			
+				stop = 1;
+			}
 
 		} else {
 
