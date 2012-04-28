@@ -10,14 +10,14 @@
 
 int main() {
 
-	FILE *fp[5];
+	FILE *fp[6];
 
 	fp[0] = fopen("testData1","wb");
 	fp[1] = fopen("testData2","wb");
 	fp[2] = fopen("testData4","wb");
 	fp[3] = fopen("testData8","wb");
 	fp[4] = fopen("testData16","wb");
-
+	fp[5] = fopen("testData32","wb");
 
 	srand(time(NULL));
 	long int i=0;
@@ -32,7 +32,7 @@ int main() {
 
 	int count = 0;
 
-	for(count = 0; count < 5; count++) {
+	for(count = 0; count < 6; count++) {
 
 		fwrite(&size, sizeof(long int), 1, fp[count]);
 
@@ -58,6 +58,10 @@ int main() {
 
 		fwrite(&procs, sizeof(int), 1, fp[4]);
 
+		procs = 32;
+
+		fwrite(&procs, sizeof(int), 1, fp[5]);
+
 
 	int k = 0;
 	for(k=0; k<FACTOR; k++) {//50 MB
@@ -68,7 +72,7 @@ int main() {
 			for(j=0; j<SIZE; j++) { //1kB
 				char c = (rand() % 4) + 97;
 				int m = 0;
-				for(m=0; m<5; m++) {
+				for(m=0; m<6; m++) {
 
 					fwrite(&c, sizeof(char), 1, fp[m]);
 
@@ -77,7 +81,7 @@ int main() {
 		}
 	}
 	int m = 0;
-    for(m=0; m<5; m++) {
+    for(m=0; m<6; m++) {
 		fclose(fp[m]);
 	}
 	return 0;

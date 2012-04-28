@@ -10,7 +10,7 @@
 #define MAXPROCS 16
 using namespace std;
 
-dictionary d[MAXPROCS];
+//dictionary d[MAXPROCS];
 
 double gettime()
 {
@@ -24,6 +24,8 @@ vector<int> compressData(string source, int start, int end, int procs, double* t
 
 	vector<int> result;
 
+	dictionary di;
+
 	string temp;
 
 	temp.append(source, start, 1);
@@ -36,17 +38,17 @@ vector<int> compressData(string source, int start, int end, int procs, double* t
 	double e;
 
 	if(start > end) {	//One Corner case
-		result.push_back(d[procs].retrive(temp));
+		result.push_back(di.retrive(temp));
 	}
 
 	s = gettime();
-	int prevIndex = d[procs].retrive(temp);
+	int prevIndex = di.retrive(temp);
 	*rcount = *rcount + 1;
 	e = gettime();
 	*rtimer += (e-s);
 	while(start <= end) {
 		s = gettime();
-		index = d[procs].retrive(temp);
+		index = di.retrive(temp);
 		*rcount = *rcount + 1;
 		e = gettime();
         *rtimer += (e-s);
@@ -55,7 +57,7 @@ vector<int> compressData(string source, int start, int end, int procs, double* t
 
 //			cout<<endl<<"Added: "<<temp<<" "<<count;
 			s = gettime();
-			d[procs].add(temp, count);
+			di.add(temp, count);
 			*acount = *acount + 1;
 			e = gettime();
 		    *timer += (e-s);
@@ -71,7 +73,7 @@ vector<int> compressData(string source, int start, int end, int procs, double* t
 			
 			if(start == end) {
 				s = gettime();
-				index = d[procs].retrive(temp);
+				index = di.retrive(temp);
 				*rcount = *rcount + 1;
 				e = gettime();
 			    *rtimer += (e-s);
@@ -174,9 +176,13 @@ int main(int argc, char **argv)
 
 		double TimeHashTableRetrive = 0;
 
+		int cAdd = 0;
+
+		int cRet = 0;
+
 		double s = gettime();
 
-		res[i] = compressData(str, 0, (size)/numOfProcs, i, &TimeHashTableAdd, &TimeHashTableRetrive, &countAdd[i], &countRetrive[i]);
+		res[i] = compressData(str, 0, (size)/numOfProcs, i, &TimeHashTableAdd, &TimeHashTableRetrive, &cAdd, &cRet);
 
 		double e = gettime();
 
@@ -187,6 +193,10 @@ int main(int argc, char **argv)
 		hashTableTimeAdd[i] += TimeHashTableAdd;
 
 		hashTableTimeRetrive[i] += TimeHashTableRetrive;
+
+		countAdd[i] = cAdd;
+
+		countRetrive[i] = cRet;
 
 	//	lookup+=(TimeHashTable);
 
@@ -223,9 +233,9 @@ int main(int argc, char **argv)
 
 //		cout<<endl<<"Processor: "<<j;
 
-		cout<<endl<<"Effort for Adding: "<<d[j].getCollision();
+		//cout<<endl<<"Effort for Adding: "<<d[j].getCollision();
 
-		cout<<endl<<"Effort for retrive: "<<d[j].getRetEffort();
+		//cout<<endl<<"Effort for retrive: "<<d[j].getRetEffort();
 
 //		cout<<endl<<"Number of Entries in hash Table: "<<d[j].getSize();
 
