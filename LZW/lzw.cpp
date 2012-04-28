@@ -41,26 +41,26 @@ vector<int> compressData(string source, int start, int end, int procs, double* t
 		result.push_back(di.retrive(temp));
 	}
 
-	s = gettime();
+//	s = gettime();
 	int prevIndex = di.retrive(temp);
-	*rcount = *rcount + 1;
-	e = gettime();
-	*rtimer += (e-s);
+//	*rcount = *rcount + 1;
+//	e = gettime();
+//	*rtimer += (e-s);
 	while(start <= end) {
-		s = gettime();
+//		s = gettime();
 		index = di.retrive(temp);
-		*rcount = *rcount + 1;
-		e = gettime();
-        *rtimer += (e-s);
+//		*rcount = *rcount + 1;
+//		e = gettime();
+  //      *rtimer += (e-s);
 
 		if(index == -1) {
 
 //			cout<<endl<<"Added: "<<temp<<" "<<count;
-			s = gettime();
+//			s = gettime();
 			di.add(temp, count);
-			*acount = *acount + 1;
-			e = gettime();
-		    *timer += (e-s);
+//			*acount = *acount + 1;
+//			e = gettime();
+//		    *timer += (e-s);
 
 			count++;
 			result.push_back(prevIndex); 
@@ -72,11 +72,11 @@ vector<int> compressData(string source, int start, int end, int procs, double* t
 			prevIndex = index;
 			
 			if(start == end) {
-				s = gettime();
+//				s = gettime();
 				index = di.retrive(temp);
-				*rcount = *rcount + 1;
-				e = gettime();
-			    *rtimer += (e-s);
+//				*rcount = *rcount + 1;
+//				e = gettime();
+//			    *rtimer += (e-s);
 
 				if(index == -1) {
 					result.push_back(prevIndex);
@@ -182,7 +182,7 @@ int main(int argc, char **argv)
 
 		double s = gettime();
 
-		res[i] = compressData(str, 0, (size)/numOfProcs, i, &TimeHashTableAdd, &TimeHashTableRetrive, &cAdd, &cRet);
+		compressData(str, 0, (size)/numOfProcs, i, &TimeHashTableAdd, &TimeHashTableRetrive, &cAdd, &cRet);
 
 		double e = gettime();
 
