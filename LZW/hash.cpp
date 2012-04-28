@@ -19,6 +19,9 @@ using namespace std;
 hashTable::hashTable() {
 
 	size = 0;
+
+	collision = 0;
+
 }
 void hashTable::add(string key, int value) {
 
@@ -29,7 +32,7 @@ void hashTable::add(string key, int value) {
 
 	for(i=0;i<key.size();i++) {
 	
-		 pos = (pos << 2) ^ (key[i] & 7); 
+		 pos = (pos << 2) + (key[i]);
 
 	}
 
@@ -40,6 +43,8 @@ void hashTable::add(string key, int value) {
 	while(!(dict[pos].str.empty())) {
 
 		pos = (pos + 1) % SIZE;
+
+		collision++;
 
 		if(pos == temp) return;
 	}
@@ -74,7 +79,7 @@ int hashTable::retrive(string key) {
 
 	for(i=0;i<key.size();i++) {
 
-         pos = (pos << 2) ^ (key[i] & 7);
+         pos = (pos << 2) + (key[i]);
 
     }
 
@@ -84,7 +89,6 @@ int hashTable::retrive(string key) {
 
 	int stop = 0;
 
-	int temp = pos;
 
 	while(!stop) {
 
@@ -95,11 +99,6 @@ int hashTable::retrive(string key) {
 		if((dict[pos].str.compare(key)) != 0) {
 		
 			pos = (pos + 1)	% SIZE;	
-
-			if(pos == temp) {
-			
-				stop = 1;
-			}
 
 		} else {
 
@@ -168,4 +167,9 @@ string hashTable::retriveStr(int key) {
 long int hashTable::getSize() {
 
 	return size;
+}
+long int hashTable::getCollision() {
+
+	return collision;
+
 }

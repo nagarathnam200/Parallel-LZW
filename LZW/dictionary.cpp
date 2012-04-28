@@ -37,6 +37,11 @@ string dictionary:: retriveStr(int key) {
 
 }
 
+long int dictionary:: getCollision() {
+
+	return ht.getCollision();
+
+}
 /*void dictionary::print(int flag) {
 
 	if(flag == 0) {

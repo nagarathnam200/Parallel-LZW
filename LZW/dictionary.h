@@ -25,4 +25,5 @@ class dictionary {
 	void addNum(int value, string key);
 	int retrive(string key);
 	string retriveStr(int value);
+	long int getCollision();
 };
