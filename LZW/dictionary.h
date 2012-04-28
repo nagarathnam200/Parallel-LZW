@@ -12,7 +12,7 @@
 
 #define COUNT 5
 
-#define DICSIZE 5000
+#define DICSIZE 500
 using namespace std;
 
 class dictionary {

@@ -20,7 +20,7 @@ double gettime()
 }
 
 
-vector<int> compressData(string source, int start, int end, int proc, double* timer, double* rtimer, int* acount, int* rcount) {
+vector<int> compressData(string source, int start, int end, int procs, double* timer, double* rtimer, int* acount, int* rcount) {
 
 	vector<int> result;
 
@@ -36,17 +36,17 @@ vector<int> compressData(string source, int start, int end, int proc, double* ti
 	double e;
 
 	if(start > end) {	//One Corner case
-		result.push_back(d[proc].retrive(temp));
+		result.push_back(d[procs].retrive(temp));
 	}
 
 	s = gettime();
-	int prevIndex = d[proc].retrive(temp);
+	int prevIndex = d[procs].retrive(temp);
 	*rcount = *rcount + 1;
 	e = gettime();
 	*rtimer += (e-s);
 	while(start <= end) {
 		s = gettime();
-		index = d[proc].retrive(temp);
+		index = d[procs].retrive(temp);
 		*rcount = *rcount + 1;
 		e = gettime();
         *rtimer += (e-s);
@@ -55,7 +55,7 @@ vector<int> compressData(string source, int start, int end, int proc, double* ti
 
 //			cout<<endl<<"Added: "<<temp<<" "<<count;
 			s = gettime();
-			d[proc].add(temp, count);
+			d[procs].add(temp, count);
 			*acount = *acount + 1;
 			e = gettime();
 		    *timer += (e-s);
@@ -71,7 +71,7 @@ vector<int> compressData(string source, int start, int end, int proc, double* ti
 			
 			if(start == end) {
 				s = gettime();
-				index = d[proc].retrive(temp);
+				index = d[procs].retrive(temp);
 				*rcount = *rcount + 1;
 				e = gettime();
 			    *rtimer += (e-s);
@@ -182,7 +182,7 @@ int main(int argc, char **argv)
 
 //		cout<<endl<<"This proc took: "<<(e-s);
 
-		diffProcs[i] += (e-s);
+		diffProcs[i] = (e-s);
 
 		hashTableTimeAdd[i] += TimeHashTableAdd;
 
@@ -211,23 +211,23 @@ int main(int argc, char **argv)
 
 		elementCount+=res[j].size();
 
-		//cout<<endl<<"Computation time on Processor: "<<j<<" "<<diffProcs[j];
+		cout<<endl<<"Computation time on Processor: "<<j<<" "<<diffProcs[j];
 
-		//cout<<endl<<"Time spent on Adding in HashTable in Processor: "<<j<<" "<<hashTableTimeAdd[j];
+		cout<<endl<<"Time spent on Adding in HashTable in Processor: "<<j<<" "<<hashTableTimeAdd[j];
 
 		//cout<<endl<<"Entries Added: "<<countAdd[j];
 
-		//cout<<endl<<"Time spent on Retriving in HashTable in Processors: "<<j<<" "<<hashTableTimeRetrive[j];
+		cout<<endl<<"Time spent on Retriving in HashTable in Processors: "<<j<<" "<<hashTableTimeRetrive[j];
 
 		//cout<<endl<<"Entries Retrived: "<<countRetrive[j];
 
-		cout<<endl<<"Processor: "<<j;
+//		cout<<endl<<"Processor: "<<j;
 
 		cout<<endl<<"Effort for Adding: "<<d[j].getCollision();
 
 		cout<<endl<<"Effort for retrive: "<<d[j].getRetEffort();
 
-		cout<<endl<<"Number of Entries in hash Table: "<<d[j].getSize();
+//		cout<<endl<<"Number of Entries in hash Table: "<<d[j].getSize();
 
         for(i=0;i<res[j].size();i++) {
 

@@ -34,13 +34,13 @@ void hashTable::add(string key, int value) {
 
 	for(i=0;i<key.size();i++) {
 	
-		 pos = (pos << 2) + (key[i]);
+		 pos = (pos << 2) ^ (key[i] & 7);
 
 	}
 
     pos = (pos * i) % SIZE;
 
-	int temp = pos;
+	collision++;
 
 	while(!(dict[pos].str.empty())) {
 
@@ -48,8 +48,8 @@ void hashTable::add(string key, int value) {
 
 		collision++;
 
-		if(pos == temp) return;
 	}
+
 
 	dict[pos].str = key;
 	dict[pos].worth = value;
@@ -81,7 +81,7 @@ int hashTable::retrive(string key) {
 
 	for(i=0;i<key.size();i++) {
 
-         pos = (pos << 2) + (key[i]);
+         pos = (pos << 2) ^ (key[i] & 7);
 
     }
 
@@ -109,6 +109,8 @@ int hashTable::retrive(string key) {
 			flag = 1;
 
 			stop = 1;
+		
+			getEffort++;
 
 		}
 
