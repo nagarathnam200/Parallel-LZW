@@ -26,4 +26,6 @@ class dictionary {
 	int retrive(string key);
 	string retriveStr(int value);
 	long int getCollision();
+	long int getRetEffort();
+	long int getSize();
 };

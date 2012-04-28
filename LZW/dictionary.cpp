@@ -42,6 +42,18 @@ long int dictionary:: getCollision() {
 	return ht.getCollision();
 
 }
+
+long int dictionary:: getSize() {
+
+	return ht.getSize();
+
+}
+
+long int dictionary:: getRetEffort() {
+
+	return ht.getRetEffort();
+
+}
 /*void dictionary::print(int flag) {
 
 	if(flag == 0) {

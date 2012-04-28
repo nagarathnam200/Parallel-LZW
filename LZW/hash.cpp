@@ -22,6 +22,8 @@ hashTable::hashTable() {
 
 	collision = 0;
 
+	getEffort = 0;
+
 }
 void hashTable::add(string key, int value) {
 
@@ -100,6 +102,8 @@ int hashTable::retrive(string key) {
 		
 			pos = (pos + 1)	% SIZE;	
 
+			getEffort++;
+
 		} else {
 
 			flag = 1;
@@ -171,5 +175,10 @@ long int hashTable::getSize() {
 long int hashTable::getCollision() {
 
 	return collision;
+
+}
+long int hashTable::getRetEffort() {
+
+	return getEffort;
 
 }

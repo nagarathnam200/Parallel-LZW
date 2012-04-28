@@ -26,6 +26,7 @@ class hashTable {
     node decode[SIZE];
 	long int size;
 	long int collision;
+	long int getEffort;
 	public:
 
 	hashTable();
@@ -37,4 +38,5 @@ class hashTable {
 	void print();
 	long int getSize();
 	long int getCollision();
+	long int getRetEffort();
 };
