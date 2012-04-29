@@ -6,7 +6,7 @@
 
 #define PROCS 2 
 
-#define FACTOR 8
+#define FACTOR 18
 
 int main() {
 

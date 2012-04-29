@@ -14,7 +14,7 @@ dictionary::dictionary() {
 	ht.addNum(3,"d");
 	ht.addNum(4,"e");
 }
-void dictionary::add(string key, int value) {
+void dictionary::add(char *key, int value) {
 
 	if(ht.getSize() > DICSIZE) return;
 	ht.add(key, value);
@@ -25,8 +25,9 @@ void dictionary::addNum(int key, string value) {
 
 	ht.addNum(key,value);
 }
-int dictionary::retrive(string key) {
-	
+int dictionary::retrive(char *key) {
+
+//	cout<<endl<<"Retriving Key: "<<key;	
 	return ht.retrive(key);
 
 }

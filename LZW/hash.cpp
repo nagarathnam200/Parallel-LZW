@@ -25,16 +25,18 @@ hashTable::hashTable() {
 	getEffort = 0;
 
 }
-void hashTable::add(string key, int value) {
+void hashTable::add(char *keyP, int value) {
 
-
+	//string key(keyP);
 	int i=0;
+
+	int len = strlen(keyP);
 
 	unsigned int pos = 0;
 
-	for(i=0;i<key.size();i++) {
+	for(i=0;i<len;i++) {
 	
-		 pos = (pos << 2) ^ (key[i] & 7);
+		 pos = (pos << 2) ^ (keyP[i] & 7);
 
 	}
 
@@ -51,7 +53,7 @@ void hashTable::add(string key, int value) {
 	}
 
 
-	dict[pos].str = key;
+	dict[pos].str = keyP;
 	dict[pos].worth = value;
 
 	size++;
@@ -73,7 +75,9 @@ void hashTable::addNum(int key, string value) {
 
 }
 
-int hashTable::retrive(string key) {
+int hashTable::retrive(char *keyP) {
+
+	string key(keyP);
 
 	int i=0;
 

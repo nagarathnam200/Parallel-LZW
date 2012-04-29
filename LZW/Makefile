@@ -14,14 +14,12 @@ lzw: lzw.o dictionary.o util.o lzwDecoder.o hash.o
 	$(CC) $(CFLAGS) lzwDecoder.o dictionary.o util.o hash.o -o lzwDecoder
 	$(CC) $(CFLAGS) testDataGenerator.o -o tg
 	$(CC) $(CFLAGS) testDataReader.o -o tr
-	$(CC) $(CFLAGS) hashTester.o hash.o -o hashit
 lzw.o: lzw.cpp
 	$(CC) $(CFLAGS) $< -c lzw.cpp
 dictionary.o: dictionary.cpp
 	$(CC) $(CFLAGS) $< -c dictionary.cpp
 hash.o: hash.cpp hashTester.cpp
 	$(CC) $(CFLAGS) $< -c hash.cpp
-	$(CC) $(CFLAGS) $< -c hashTester.cpp
 util.o: util.cpp
 	$(CC) $(CFLAGS) $< -c util.cpp
 lzwDecoder.o: lzwDecoder.cpp

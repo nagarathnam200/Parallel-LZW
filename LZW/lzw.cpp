@@ -20,15 +20,19 @@ double gettime()
 }
 
 
-vector<int> compressData(string source, int start, int end, int procs, double* timer, double* rtimer, int* acount, int* rcount) {
+vector<int> compressData(char* source, int start, int end, int procs, double* timer, double* rtimer, int* acount, int* rcount) {
 
 	vector<int> result;
 
 	dictionary di;
 
-	string temp;
+	char *temp = (char *) calloc(end, sizeof(char));
+	
+	int curTemp = 0;
 
-	temp.append(source, start, 1);
+//	string temp;
+
+	temp[curTemp++] = source[start];
 
 	start+=1;
 
@@ -43,12 +47,16 @@ vector<int> compressData(string source, int start, int end, int procs, double* t
 
 //	s = gettime();
 	int prevIndex = di.retrive(temp);
+
+//	cout<<endl<<"Prev Index is: "<<prevIndex;
 //	*rcount = *rcount + 1;
 //	e = gettime();
 //	*rtimer += (e-s);
 	while(start <= end) {
 //		s = gettime();
 		index = di.retrive(temp);
+
+//		cout<<endl<<"In the index:"<<index<<" is the string "<<temp;
 //		*rcount = *rcount + 1;
 //		e = gettime();
   //      *rtimer += (e-s);
@@ -65,9 +73,16 @@ vector<int> compressData(string source, int start, int end, int procs, double* t
 			count++;
 			result.push_back(prevIndex); 
 //			cout<<endl<<d.retrive(temp.substr(0, temp.length()-1));
-			temp.erase(temp.begin(),temp.end()-1);
+			curTemp--;
+
+			temp = temp + curTemp;
+
+			curTemp = 1;
+			
+		//	temp.erase(temp.begin(),temp.end()-1);
+		//	start++;//------------------>Delete this!!!!!
 		} else{
-			temp.append(source, start, 1);
+			temp[curTemp++] = source[start];
 			start++;
 			prevIndex = index;
 			
@@ -80,7 +95,7 @@ vector<int> compressData(string source, int start, int end, int procs, double* t
 
 				if(index == -1) {
 					result.push_back(prevIndex);
-					result.push_back(temp[temp.length()-1]-LOWERA);
+					result.push_back(temp[curTemp - 1]-LOWERA);
 				} else {
 					result.push_back(index);
 				}
@@ -158,19 +173,19 @@ int main(int argc, char **argv)
 
 		diffProcs[i] = 0;
 
-		hashTableTimeAdd[i] = 0;
+//		hashTableTimeAdd[i] = 0;
 
-		hashTableTimeRetrive[i] = 0;
+//		hashTableTimeRetrive[i] = 0;
 
-		countAdd[i] = 0;
+//		countAdd[i] = 0;
 
-		countRetrive[i] = 0;
+//		countRetrive[i] = 0;
 
-		char *data = (char *)malloc(sizeof(char) * (size/numOfProcs));
+		char *data = (char *)malloc(sizeof(char) * ((size/numOfProcs) + 1));
 
 		readChunk(data, filename, (i+1));
 
-		string str(data);
+		data[(size/numOfProcs)] = '\0';
 
 		double TimeHashTableAdd = 0;
 
@@ -182,7 +197,7 @@ int main(int argc, char **argv)
 
 		double s = gettime();
 
-		compressData(str, 0, (size)/numOfProcs, i, &TimeHashTableAdd, &TimeHashTableRetrive, &cAdd, &cRet);
+		res[i] = compressData(data, 0, (size)/numOfProcs, i, &TimeHashTableAdd, &TimeHashTableRetrive, &cAdd, &cRet);
 
 		double e = gettime();
 
@@ -190,13 +205,13 @@ int main(int argc, char **argv)
 
 		diffProcs[i] = (e-s);
 
-		hashTableTimeAdd[i] += TimeHashTableAdd;
+//		hashTableTimeAdd[i] += TimeHashTableAdd;
 
-		hashTableTimeRetrive[i] += TimeHashTableRetrive;
+//		hashTableTimeRetrive[i] += TimeHashTableRetrive;
 
-		countAdd[i] = cAdd;
+//		countAdd[i] = cAdd;
 
-		countRetrive[i] = cRet;
+//		countRetrive[i] = cRet;
 
 	//	lookup+=(TimeHashTable);
 
@@ -215,7 +230,7 @@ int main(int argc, char **argv)
 
 	fwrite(&numOfProcs, sizeof(int), 1, fp);
 
-	cout<<endl<<"Collision Details: ";
+//	cout<<endl<<"Collision Details: ";
 
     for(j=0;j<numOfProcs;j++) {
 
@@ -223,11 +238,11 @@ int main(int argc, char **argv)
 
 		cout<<endl<<"Computation time on Processor: "<<j<<" "<<diffProcs[j];
 
-		cout<<endl<<"Time spent on Adding in HashTable in Processor: "<<j<<" "<<hashTableTimeAdd[j];
+//		cout<<endl<<"Time spent on Adding in HashTable in Processor: "<<j<<" "<<hashTableTimeAdd[j];
 
 		//cout<<endl<<"Entries Added: "<<countAdd[j];
 
-		cout<<endl<<"Time spent on Retriving in HashTable in Processors: "<<j<<" "<<hashTableTimeRetrive[j];
+//		cout<<endl<<"Time spent on Retriving in HashTable in Processors: "<<j<<" "<<hashTableTimeRetrive[j];
 
 		//cout<<endl<<"Entries Retrived: "<<countRetrive[j];
 
