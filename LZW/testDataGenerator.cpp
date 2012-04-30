@@ -6,7 +6,7 @@
 
 #define PROCS 2 
 
-#define FACTOR 8
+#define FACTOR 16
 
 int main() {
 
@@ -70,7 +70,7 @@ int main() {
 			int j;
 
 			for(j=0; j<SIZE; j++) { //1kB
-				char c = (rand() % 4) + 97;
+				char c = (rand() % 8) + 97;
 				int m = 0;
 				for(m=0; m<6; m++) {
 

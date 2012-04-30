@@ -1,0 +1,24 @@
+#!/bin/csh
+#PBS -l ncpus=64
+#PBS -l walltime=2:00
+#PBS -j oe
+#PBS -q batch
+
+set echo
+
+ja
+
+cd $SCRATCH
+
+cp $HOME/15418/Parallel-LZW/LZW/lzw .
+cp $HOME/15418/Parallel-LZW/LZW/tg .
+
+./tg
+
+setenv OMP_NUM_THREADS $PBS_NCPUS
+
+		omplace -nt $OMP_NUM_THREADS ./lzw -p 32 -i testData32
+
+		omplace -nt $OMP_NUM_THREADS ./lzw -p 64 -i testData64
+
+ja -chlst

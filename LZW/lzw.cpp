@@ -132,7 +132,7 @@ int main(int argc, char **argv)
 
 	char *data[MAXPROCS];
 
-	#pragma omp parallel for
+	#pragma omp parallel for firstprivate(numOfProcs, size, i, filename)
 	for(i=0;i<numOfProcs;i++) {
 		
 		data[i] = (char *)malloc(sizeof(char) * (size/numOfProcs));
