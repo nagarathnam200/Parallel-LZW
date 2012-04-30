@@ -1,0 +1,40 @@
+module: Command not found.
+ja
+cd /brashear/nmuthusa
+cp /usr/users/4/nmuthusa/15418/Parallel-LZW/LZW/lzw .
+cp /usr/users/4/nmuthusa/15418/Parallel-LZW/LZW/tg .
+./tg
+setenv OMP_NUM_THREADS 16
+omplace -nt 16 ./lzw -p 1 -i testData1
+
+Computation time on Processor: 0 0.634904
+Total Number of Procs: 1
+The total Time taken is : 3.59063
+The Element Count is: 4167690omplace -nt 16 ./lzw -p 2 -i testData2
+
+Computation time on Processor: 0 0.310125
+Computation time on Processor: 1 0.323653
+Total Number of Procs: 2
+The total Time taken is : 7.07676
+The Element Count is: 4197528omplace -nt 16 ./lzw -p 4 -i testData4
+
+Computation time on Processor: 0 0.16125
+Computation time on Processor: 1 0.165705
+Computation time on Processor: 2 0.158087
+Computation time on Processor: 3 0.167745
+Total Number of Procs: 4
+The total Time taken is : 39.1027
+The Element Count is: 4222709omplace -nt 16 ./lzw -p 8 -i testData8
+
+Computation time on Processor: 0 0.0784559
+Computation time on Processor: 1 0.0825701
+Computation time on Processor: 2 0.0849519
+Computation time on Processor: 3 0.0841758
+Computation time on Processor: 4 0.0839589
+Computation time on Processor: 5 0.082794
+Computation time on Processor: 6 0.080487
+Computation time on Processor: 7 0.0811219
+Total Number of Procs: 8
+The total Time taken is : 40.8215
+The Element Count is: 4217440omplace -nt 16 ./lzw -p 16 -i testData16
+=>> PBS: job killed: walltime 103 exceeded limit 60

@@ -9,15 +9,27 @@
 #include <fcntl.h>
 #include <sys/time.h>
 
+#define COUNT 5
 #define SIZE 50000
 using namespace std;
 
-typedef struct __node{
+class node{
 
-	string str;
+public:
+
+	char str[30];
+
 	int worth;
 
-}node;
+	int len;
+
+	node() {
+
+		len = -1;
+
+	}
+
+};
 
 class hashTable {
 
@@ -30,9 +42,9 @@ class hashTable {
 
 	hashTable();
 
-	void add(string &key, int value);
+	void add(char *key, int value);
 	void addNum(int key, string value);
-	int retrive(string &key);
+	int retrive(char *key);
 	string retriveStr(int key);
 	void print();
 	long int getSize();
