@@ -2,11 +2,15 @@
 
 dictionary::dictionary() {
 
-	ht.add("a",0);
-	ht.add("b",1);
-	ht.add("c",2);
-	ht.add("d",3);
-	ht.add("e",4);
+	int i;
+
+	for(i=0;i<COUNT;i++) {
+
+		string t(1,(97+i));
+
+		ht.add(t,i);
+
+	}
 
 	ht.addNum(0,"a");
 	ht.addNum(1,"b");
@@ -14,7 +18,7 @@ dictionary::dictionary() {
 	ht.addNum(3,"d");
 	ht.addNum(4,"e");
 }
-void dictionary::add(char *key, int value) {
+void dictionary::add(string &key, int value) {
 
 	if(ht.getSize() > DICSIZE) return;
 	ht.add(key, value);
@@ -25,9 +29,8 @@ void dictionary::addNum(int key, string value) {
 
 	ht.addNum(key,value);
 }
-int dictionary::retrive(char *key) {
-
-//	cout<<endl<<"Retriving Key: "<<key;	
+int dictionary::retrive(string &key) {
+	
 	return ht.retrive(key);
 
 }

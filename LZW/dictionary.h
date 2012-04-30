@@ -10,7 +10,7 @@
 #include <sys/time.h>
 #include "hash.h"
 
-#define COUNT 5
+#define COUNT 4
 
 #define DICSIZE 500
 using namespace std;
@@ -21,9 +21,9 @@ class dictionary {
 
 	public:
 	dictionary();
-	void add(char *key, int value);
+	void add(string &key, int value);
 	void addNum(int value, string key);
-	int retrive(char *key);
+	int retrive(string &key);
 	string retriveStr(int value);
 	long int getCollision();
 	long int getRetEffort();

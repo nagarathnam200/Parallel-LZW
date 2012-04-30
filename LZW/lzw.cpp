@@ -10,8 +10,6 @@
 #define MAXPROCS 16
 using namespace std;
 
-//dictionary d[MAXPROCS];
-
 double gettime()
 {
     struct timeval tv;
@@ -20,19 +18,15 @@ double gettime()
 }
 
 
-vector<int> compressData(char* source, int start, int end, int procs, double* timer, double* rtimer, int* acount, int* rcount) {
+vector<int> compressData(string source, int start, int end, int proc) {
 
 	vector<int> result;
 
-	dictionary di;
+	dictionary d;
 
-	char *temp = (char *) calloc(end, sizeof(char));
-	
-	int curTemp = 0;
+	string temp;
 
-//	string temp;
-
-	temp[curTemp++] = source[start];
+	temp.append(source, start, 1);
 
 	start+=1;
 
@@ -42,60 +36,30 @@ vector<int> compressData(char* source, int start, int end, int procs, double* ti
 	double e;
 
 	if(start > end) {	//One Corner case
-		result.push_back(di.retrive(temp));
+		result.push_back(d.retrive(temp));
 	}
 
-//	s = gettime();
-	int prevIndex = di.retrive(temp);
-
-//	cout<<endl<<"Prev Index is: "<<prevIndex;
-//	*rcount = *rcount + 1;
-//	e = gettime();
-//	*rtimer += (e-s);
+	int prevIndex = d.retrive(temp);
 	while(start <= end) {
-//		s = gettime();
-		index = di.retrive(temp);
-
-//		cout<<endl<<"In the index:"<<index<<" is the string "<<temp;
-//		*rcount = *rcount + 1;
-//		e = gettime();
-  //      *rtimer += (e-s);
-
+		index = d.retrive(temp);
 		if(index == -1) {
 
 //			cout<<endl<<"Added: "<<temp<<" "<<count;
-//			s = gettime();
-			di.add(temp, count);
-//			*acount = *acount + 1;
-//			e = gettime();
-//		    *timer += (e-s);
-
+			d.add(temp, count);
 			count++;
 			result.push_back(prevIndex); 
 //			cout<<endl<<d.retrive(temp.substr(0, temp.length()-1));
-			curTemp--;
-
-			temp = temp + curTemp;
-
-			curTemp = 1;
-			
-		//	temp.erase(temp.begin(),temp.end()-1);
-		//	start++;//------------------>Delete this!!!!!
+			temp.erase(temp.begin(),temp.end()-1);
 		} else{
-			temp[curTemp++] = source[start];
+			temp.append(source, start, 1);
 			start++;
 			prevIndex = index;
 			
 			if(start == end) {
-//				s = gettime();
-				index = di.retrive(temp);
-//				*rcount = *rcount + 1;
-//				e = gettime();
-//			    *rtimer += (e-s);
-
+				index = d.retrive(temp);
 				if(index == -1) {
 					result.push_back(prevIndex);
-					result.push_back(temp[curTemp - 1]-LOWERA);
+					result.push_back(temp[temp.length()-1]-LOWERA);
 				} else {
 					result.push_back(index);
 				}
@@ -166,57 +130,29 @@ int main(int argc, char **argv)
 
 	int countRetrive[MAXPROCS];
 
-	#pragma omp parallel 
-	{
-	#pragma omp for firstprivate(filename, size, numOfProcs)
+	char *data[MAXPROCS];
+
+	#pragma omp parallel for
+	for(i=0;i<numOfProcs;i++) {
+		
+		data[i] = (char *)malloc(sizeof(char) * (size/numOfProcs));
+
+		readChunk(data[i], filename, (i+1));
+
+	}
+
+	double sComp = gettime();
+	#pragma omp parallel for firstprivate(filename, size, numOfProcs) shared(data)
 	for(i=0;i<numOfProcs;i++) {
 
-		diffProcs[i] = 0;
+		string str(data[i]);
 
-//		hashTableTimeAdd[i] = 0;
-
-//		hashTableTimeRetrive[i] = 0;
-
-//		countAdd[i] = 0;
-
-//		countRetrive[i] = 0;
-
-		char *data = (char *)malloc(sizeof(char) * ((size/numOfProcs) + 1));
-
-		readChunk(data, filename, (i+1));
-
-		data[(size/numOfProcs)] = '\0';
-
-		double TimeHashTableAdd = 0;
-
-		double TimeHashTableRetrive = 0;
-
-		int cAdd = 0;
-
-		int cRet = 0;
-
-		double s = gettime();
-
-		res[i] = compressData(data, 0, (size)/numOfProcs, i, &TimeHashTableAdd, &TimeHashTableRetrive, &cAdd, &cRet);
-
-		double e = gettime();
+		res[i] = compressData(str, 0, (size)/numOfProcs, i);
 
 //		cout<<endl<<"This proc took: "<<(e-s);
 
-		diffProcs[i] = (e-s);
-
-//		hashTableTimeAdd[i] += TimeHashTableAdd;
-
-//		hashTableTimeRetrive[i] += TimeHashTableRetrive;
-
-//		countAdd[i] = cAdd;
-
-//		countRetrive[i] = cRet;
-
-	//	lookup+=(TimeHashTable);
-
 	}
-	}
+	double eComp = gettime();
 
     int j;
 
@@ -230,29 +166,11 @@ int main(int argc, char **argv)
 
 	fwrite(&numOfProcs, sizeof(int), 1, fp);
 
-//	cout<<endl<<"Collision Details: ";
-
     for(j=0;j<numOfProcs;j++) {
 
 		elementCount+=res[j].size();
 
-		cout<<endl<<"Computation time on Processor: "<<j<<" "<<diffProcs[j];
-
-//		cout<<endl<<"Time spent on Adding in HashTable in Processor: "<<j<<" "<<hashTableTimeAdd[j];
-
-		//cout<<endl<<"Entries Added: "<<countAdd[j];
-
-//		cout<<endl<<"Time spent on Retriving in HashTable in Processors: "<<j<<" "<<hashTableTimeRetrive[j];
-
-		//cout<<endl<<"Entries Retrived: "<<countRetrive[j];
-
-//		cout<<endl<<"Processor: "<<j;
-
-		//cout<<endl<<"Effort for Adding: "<<d[j].getCollision();
-
-		//cout<<endl<<"Effort for retrive: "<<d[j].getRetEffort();
-
-//		cout<<endl<<"Number of Entries in hash Table: "<<d[j].getSize();
+//		cout<<endl<<"Processor "<<j<<" has "<<d[j].getCollision();
 
         for(i=0;i<res[j].size();i++) {
 
@@ -277,6 +195,7 @@ int main(int argc, char **argv)
 	cout<<endl<<"Total Number of Procs: "<<numOfProcs;
 	cout<<endl<<"The total Time taken is : "<<end - start;
 	cout<<endl<<"The Element Count is: "<<elementCount;
+	cout<<endl<<"The Computation Time is: "<<eComp - sComp;
 	
 	fclose(fp);
 }

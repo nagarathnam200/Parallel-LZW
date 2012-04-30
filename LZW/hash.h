@@ -9,7 +9,6 @@
 #include <fcntl.h>
 #include <sys/time.h>
 
-#define COUNT 5
 #define SIZE 50000
 using namespace std;
 
@@ -31,9 +30,9 @@ class hashTable {
 
 	hashTable();
 
-	void add(char *key, int value);
+	void add(string &key, int value);
 	void addNum(int key, string value);
-	int retrive(char *key);
+	int retrive(string &key);
 	string retriveStr(int key);
 	void print();
 	long int getSize();

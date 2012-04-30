@@ -1,0 +1,399 @@
+module: Command not found.
+ja
+cd /brashear/nmuthusa
+cp /usr/users/4/nmuthusa/15418/Parallel-LZW/LZW/lzw .
+cp /usr/users/4/nmuthusa/15418/Parallel-LZW/LZW/tg .
+./tg
+setenv OMP_NUM_THREADS 16
+omplace -nt 16 ./lzw -p 1 -i testData1
+
+Collision Details: 
+Computation time on Processor: 0 0.949001
+Time spent on Adding in HashTable in Processor: 0 0
+Time spent on Retriving in HashTable in Processors: 0 0
+Total Number of Procs: 1
+The total Time taken is : 1.0093
+The Element Count is: 0omplace -nt 16 ./lzw -p 2 -i testData2
+
+Collision Details: 
+Computation time on Processor: 0 0.487837
+Time spent on Adding in HashTable in Processor: 0 0
+Time spent on Retriving in HashTable in Processors: 0 0
+Computation time on Processor: 1 0.487329
+Time spent on Adding in HashTable in Processor: 1 0
+Time spent on Retriving in HashTable in Processors: 1 0
+Total Number of Procs: 2
+The total Time taken is : 0.528951
+The Element Count is: 0omplace -nt 16 ./lzw -p 4 -i testData4
+
+Collision Details: 
+Computation time on Processor: 0 0.242029
+Time spent on Adding in HashTable in Processor: 0 0
+Time spent on Retriving in HashTable in Processors: 0 0
+Computation time on Processor: 1 0.239627
+Time spent on Adding in HashTable in Processor: 1 0
+Time spent on Retriving in HashTable in Processors: 1 0
+Computation time on Processor: 2 0.241317
+Time spent on Adding in HashTable in Processor: 2 0
+Time spent on Retriving in HashTable in Processors: 2 0
+Computation time on Processor: 3 0.243564
+Time spent on Adding in HashTable in Processor: 3 0
+Time spent on Retriving in HashTable in Processors: 3 0
+Total Number of Procs: 4
+The total Time taken is : 0.288785
+The Element Count is: 0omplace -nt 16 ./lzw -p 8 -i testData8
+
+Collision Details: 
+Computation time on Processor: 0 0.119493
+Time spent on Adding in HashTable in Processor: 0 0
+Time spent on Retriving in HashTable in Processors: 0 0
+Computation time on Processor: 1 0.121268
+Time spent on Adding in HashTable in Processor: 1 0
+Time spent on Retriving in HashTable in Processors: 1 0
+Computation time on Processor: 2 0.120557
+Time spent on Adding in HashTable in Processor: 2 0
+Time spent on Retriving in HashTable in Processors: 2 0
+Computation time on Processor: 3 0.121502
+Time spent on Adding in HashTable in Processor: 3 0
+Time spent on Retriving in HashTable in Processors: 3 0
+Computation time on Processor: 4 0.123649
+Time spent on Adding in HashTable in Processor: 4 0
+Time spent on Retriving in HashTable in Processors: 4 0
+Computation time on Processor: 5 0.120549
+Time spent on Adding in HashTable in Processor: 5 0
+Time spent on Retriving in HashTable in Processors: 5 0
+Computation time on Processor: 6 0.121853
+Time spent on Adding in HashTable in Processor: 6 0
+Time spent on Retriving in HashTable in Processors: 6 0
+Computation time on Processor: 7 0.121523
+Time spent on Adding in HashTable in Processor: 7 0
+Time spent on Retriving in HashTable in Processors: 7 0
+Total Number of Procs: 8
+The total Time taken is : 0.163346
+The Element Count is: 0omplace -nt 16 ./lzw -p 16 -i testData16
+
+Collision Details: 
+Computation time on Processor: 0 0.0638559
+Time spent on Adding in HashTable in Processor: 0 0
+Time spent on Retriving in HashTable in Processors: 0 0
+Computation time on Processor: 1 0.0630651
+Time spent on Adding in HashTable in Processor: 1 0
+Time spent on Retriving in HashTable in Processors: 1 0
+Computation time on Processor: 2 0.063385
+Time spent on Adding in HashTable in Processor: 2 0
+Time spent on Retriving in HashTable in Processors: 2 0
+Computation time on Processor: 3 0.0623031
+Time spent on Adding in HashTable in Processor: 3 0
+Time spent on Retriving in HashTable in Processors: 3 0
+Computation time on Processor: 4 0.063045
+Time spent on Adding in HashTable in Processor: 4 0
+Time spent on Retriving in HashTable in Processors: 4 0
+Computation time on Processor: 5 0.062783
+Time spent on Adding in HashTable in Processor: 5 0
+Time spent on Retriving in HashTable in Processors: 5 0
+Computation time on Processor: 6 0.0625021
+Time spent on Adding in HashTable in Processor: 6 0
+Time spent on Retriving in HashTable in Processors: 6 0
+Computation time on Processor: 7 0.0635149
+Time spent on Adding in HashTable in Processor: 7 0
+Time spent on Retriving in HashTable in Processors: 7 0
+Computation time on Processor: 8 0.062633
+Time spent on Adding in HashTable in Processor: 8 0
+Time spent on Retriving in HashTable in Processors: 8 0
+Computation time on Processor: 9 0.0621419
+Time spent on Adding in HashTable in Processor: 9 0
+Time spent on Retriving in HashTable in Processors: 9 0
+Computation time on Processor: 10 0.0640888
+Time spent on Adding in HashTable in Processor: 10 0
+Time spent on Retriving in HashTable in Processors: 10 0
+Computation time on Processor: 11 0.062315
+Time spent on Adding in HashTable in Processor: 11 0
+Time spent on Retriving in HashTable in Processors: 11 0
+Computation time on Processor: 12 0.0642951
+Time spent on Adding in HashTable in Processor: 12 0
+Time spent on Retriving in HashTable in Processors: 12 0
+Computation time on Processor: 13 0.063
+Time spent on Adding in HashTable in Processor: 13 0
+Time spent on Retriving in HashTable in Processors: 13 0
+Computation time on Processor: 14 0.061662
+Time spent on Adding in HashTable in Processor: 14 0
+Time spent on Retriving in HashTable in Processors: 14 0
+Computation time on Processor: 15 0.0650458
+Time spent on Adding in HashTable in Processor: 15 0
+Time spent on Retriving in HashTable in Processors: 15 0
+Total Number of Procs: 16
+The total Time taken is : 0.113913
+The Element Count is: 0ja -chlst
+
+
+Job Accounting - Command Report
+===============================
+
+    Command       Started    Elapsed    User CPU    Sys CPU       CPU      Block I/O    Swap In      CPU MEM        Characters           Logical I/O      CoreMem   VirtMem   Ex
+     Name           At       Seconds    Seconds     Seconds    Delay Secs  Delay Secs  Delay Secs  Avg Mbytes     Read     Written     Read      Write    HiValue   HiValue   St   Ni  Fl   SBU's 
+===============  ========  ==========  ==========  ==========  ==========  ==========  ==========  ==========  =========  =========  ========  ========  ========  ========  ===  ===  ==  =======
+# CFG   ON(    1) (    7)  18:52:36 04/29/2012  System:  Linux bl1.psc.teragrid.org 2.6.32.49-0.3-default #1 SMP 2011-12-02 11:28:04 +0100 x86_64
+ja               18:52:36        0.01        0.00        0.00        0.00        0.00        0.00        9.62      0.019      0.000        19         4      1064     23784    0    0         0.00
+cp               18:52:36        0.04        0.00        0.03        0.00        0.00        0.00       15.78      0.094      0.086        17         2       916     15828    0    0         0.00
+cp               18:52:36        0.01        0.00        0.01        0.00        0.00        0.00       14.33      0.043      0.035        17         2       864     15828    0    0         0.00
+tg               18:52:37        2.65        1.40        1.22        0.00        0.00        0.00       41.43      0.314     48.000        83        31     20628     36636    0    0         0.00
+cpuset           18:52:39        0.00        0.00        0.00        0.00        0.00        0.00        0.02      0.004      0.000         9         1       564      8132    0    0         0.00
+cpuset           18:52:39        0.00        0.00        0.00        0.00        0.00        0.00        8.28      0.008      0.000        30         1       692      8132    0    0         0.00
+expr             18:52:39        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.004      0.000         8         1       672      5324    0    0         0.00
+omplace          18:52:39        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.000      0.000         0         1       864     12748    0    0  F      0.00
+sed              18:52:39        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.004      0.000        10         1       812      5396    0    0         0.00
+omplace          18:52:39        0.00        0.00        0.00        0.00        0.00        0.00       12.83      0.000      0.000         0         0       876     12744    0    0  F      0.00
+omplace          18:52:39        0.00        0.00        0.00        0.00        0.00        0.00       12.99      0.000      0.000         0         1       872     12748    0    0  F      0.00
+sed              18:52:39        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.004      0.000        10         1       812      5396    0    0         0.00
+omplace          18:52:39        0.00        0.00        0.00        0.00        0.00        0.00       13.10      0.000      0.000         0         0       876     12744    0    0  F      0.00
+omplace          18:52:39        0.00        0.00        0.00        0.00        0.00        0.00       13.22      0.000      0.000         0         1       876     12748    0    0  F      0.00
+egrep            18:52:39        0.00        0.00        0.00        0.00        0.00        0.00       12.92      0.004      0.000        10         0       836      5372    1    0         0.00
+omplace          18:52:39        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.000      0.000         0         0       880     12744    1    0  F      0.00
+omplace          18:52:39        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.000      0.000         0         1       876     12748    0    0  F      0.00
+cut              18:52:39        0.00        0.00        0.00        0.00        0.00        0.00       12.97      0.004      0.000        10         1       720      5336    0    0         0.00
+omplace          18:52:39        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.000      0.000         0         0       884     12744    0    0  F      0.00
+omplace          18:52:39        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.000      0.000         0         1       876     12748    0    0  F      0.00
+grep             18:52:39        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.004      0.000        10         0       832      5524    1    0         0.00
+omplace          18:52:39        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.000      0.000         0         1       876     12748    0    0  F      0.00
+cut              18:52:39        0.00        0.00        0.00        0.00        0.00        0.00        0.29      0.004      0.000        10         1       720      5336    0    0         0.00
+omplace          18:52:39        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.000      0.000         0         0       884     12744    0    0  F      0.00
+omplace          18:52:39        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.000      0.000         0         1       876     12748    0    0  F      0.00
+cut              18:52:39        0.00        0.00        0.00        0.00        0.00        0.00        0.02      0.004      0.000        10         1       716      5336    0    0         0.00
+omplace          18:52:39        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.000      0.000         0         0       884     12744    0    0  F      0.00
+seq              18:52:39        0.00        0.00        0.00        0.00        0.00        0.00        4.05      0.004      0.000         8         1       756      5320    0    0         0.00
+omplace          18:52:39        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.000      0.000         0         0       948     12744    0    0  F      0.00
+omplace          18:52:39        0.03        0.00        0.00        0.00        0.00        0.00       13.24      0.000      0.000        13         1      1068     12748    0    0  F      0.00
+omplace          18:52:39        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.000      0.000         0         1       860     12748    0    0  F      0.00
+wc               18:52:39        0.00        0.00        0.00        0.00        0.00        0.00        4.03      0.004      0.000        10         1       764      5320    0    0         0.00
+omplace          18:52:39        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.000      0.000         0         0       864     12744    0    0  F      0.00
+expr             18:52:39        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.004      0.000         8         1       672      5324    0    0         0.00
+cat              18:52:39        0.01        0.00        0.00        0.00        0.00        0.00       13.27      0.004      0.000        10         2       684      5332    0    0         0.00
+expr             18:52:39        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.004      0.000         8         1       668      5324    0    0         0.00
+expr             18:52:39        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.004      0.000         8         1       668      5324    0    0         0.00
+expr             18:52:39        0.00        0.00        0.00        0.00        0.00        0.00        4.19      0.004      0.000         8         1       668      5324    1    0         0.00
+cat              18:52:39        0.01        0.00        0.00        0.00        0.00        0.00       13.01      0.004      0.000        12         2       676      5332    0    0         0.00
+expr             18:52:39        0.00        0.00        0.00        0.00        0.00        0.00        0.02      0.004      0.000         8         1       668      5324    0    0         0.00
+omplace          18:52:39        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.000      0.000         0         1      1004     12748    0    0  F      0.00
+lzw              18:52:40        1.20        0.00        0.01        0.00        0.00        0.00        0.04      0.000      0.000         0         0     36620    161292    0    0         0.00
+lzw              18:52:39        2.30        0.94        0.96        0.00        0.18        0.00       79.33     12.572      0.000       618         9     36620    161292    0    0         0.00
+rm               18:52:41        0.00        0.00        0.00        0.00        0.00        0.00        4.07      0.004      0.000         8         0       700      5336    0    0         0.00
+omplace          18:52:39        2.38        0.00        0.02        0.00        0.00        0.00       10.77      0.049      0.000        47         1      1656     12744    0    0         0.00
+cpuset           18:52:41        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.004      0.000         9         1       560      8132    0    0         0.00
+cpuset           18:52:41        0.00        0.00        0.00        0.00        0.00        0.00        8.44      0.008      0.000        30         1       688      8132    0    0         0.00
+expr             18:52:41        0.00        0.00        0.00        0.00        0.00        0.00       13.07      0.004      0.000         8         1       668      5324    0    0         0.00
+omplace          18:52:41        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.000      0.000         0         1       868     12748    0    0  F      0.00
+sed              18:52:41        0.00        0.00        0.00        0.00        0.00        0.00       13.03      0.004      0.000        10         1       816      5396    0    0         0.00
+omplace          18:52:41        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.000      0.000         0         0       880     12744    0    0  F      0.00
+omplace          18:52:42        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.000      0.000         0         1       876     12748    0    0  F      0.00
+sed              18:52:42        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.004      0.000        10         1       812      5396    0    0         0.00
+omplace          18:52:42        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.000      0.000         0         0       880     12744    0    0  F      0.00
+omplace          18:52:42        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.000      0.000         0         1       880     12748    0    0  F      0.00
+egrep            18:52:42        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.004      0.000        10         0       832      5372    1    0         0.00
+omplace          18:52:42        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.000      0.000         0         0       884     12744    1    0  F      0.00
+omplace          18:52:42        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.000      0.000         0         1       880     12748    0    0  F      0.00
+cut              18:52:42        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.004      0.000        10         1       720      5336    0    0         0.00
+omplace          18:52:42        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.000      0.000         0         0       888     12744    0    0  F      0.00
+omplace          18:52:42        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.000      0.000         0         1       880     12748    0    0  F      0.00
+grep             18:52:42        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.004      0.000        10         0       828      5524    1    0         0.00
+omplace          18:52:42        0.00        0.00        0.00        0.00        0.00        0.00       12.83      0.000      0.000         0         1       880     12748    0    0  F      0.00
+cut              18:52:42        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.004      0.000        10         1       720      5336    0    0         0.00
+omplace          18:52:42        0.00        0.00        0.00        0.00        0.00        0.00       13.11      0.000      0.000         0         0       888     12744    0    0  F      0.00
+omplace          18:52:42        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.000      0.000         0         1       880     12748    0    0  F      0.00
+cut              18:52:42        0.00        0.00        0.00        0.00        0.00        0.00       13.02      0.004      0.000        10         1       720      5336    0    0         0.00
+omplace          18:52:42        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.000      0.000         0         0       888     12744    0    0  F      0.00
+seq              18:52:42        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.004      0.000         8         1       752      5320    0    0         0.00
+omplace          18:52:42        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.000      0.000         0         0       952     12744    0    0  F      0.00
+omplace          18:52:42        0.03        0.00        0.01        0.00        0.00        0.00        0.00      0.000      0.000        13         1      1072     12748    0    0  F      0.00
+omplace          18:52:42        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.000      0.000         0         1       864     12748    0    0  F      0.00
+wc               18:52:42        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.004      0.000        10         1       764      5320    0    0         0.00
+omplace          18:52:42        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.000      0.000         0         0       868     12744    0    0  F      0.00
+expr             18:52:42        0.00        0.00        0.00        0.00        0.00        0.00        4.20      0.004      0.000         8         1       672      5324    0    0         0.00
+cat              18:52:42        0.00        0.00        0.00        0.00        0.00        0.00       13.32      0.004      0.000        10         2       676      5332    0    0         0.00
+expr             18:52:42        0.00        0.00        0.00        0.00        0.00        0.00        0.28      0.004      0.000         8         1       676      5324    0    0         0.00
+expr             18:52:42        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.004      0.000         8         1       672      5324    0    0         0.00
+expr             18:52:42        0.00        0.00        0.00        0.00        0.00        0.00        4.34      0.004      0.000         8         1       672      5324    1    0         0.00
+cat              18:52:42        0.01        0.00        0.00        0.00        0.00        0.00       13.01      0.004      0.000        12         2       680      5332    0    0         0.00
+expr             18:52:42        0.00        0.00        0.00        0.00        0.00        0.00        0.28      0.004      0.000         8         1       676      5324    0    0         0.00
+omplace          18:52:42        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.000      0.000         0         1      1008     12748    0    0  F      0.00
+lzw              18:52:43        0.53        0.51        0.02        0.00        0.00        0.00      136.20      6.000      0.000         2         0     35124    153096    0    0         0.00
+lzw              18:52:43        0.60        0.00        0.01        0.00        0.00        0.00        0.04      0.000      0.000         0         0     35124    153096    0    0         0.00
+lzw              18:52:42        1.77        0.50        0.94        0.00        0.24        0.00       64.21      8.572      0.000       618        12     35124    153096    0    0         0.00
+rm               18:52:43        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.004      0.000         8         0       696      5336    0    0         0.00
+omplace          18:52:42        1.84        0.00        0.00        0.00        0.00        0.00       12.96      0.049      0.000        47         1      1660     12744    0    0         0.00
+cpuset           18:52:43        0.00        0.00        0.00        0.00        0.00        0.00        8.32      0.004      0.000         9         1       564      8132    0    0         0.00
+cpuset           18:52:43        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.008      0.000        30         1       688      8132    0    0         0.00
+expr             18:52:43        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.004      0.000         8         1       672      5324    0    0         0.00
+omplace          18:52:43        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.000      0.000         0         1       868     12748    0    0  F      0.00
+sed              18:52:43        0.00        0.00        0.00        0.00        0.00        0.00       13.03      0.004      0.000        10         1       808      5396    0    0         0.00
+omplace          18:52:43        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.000      0.000         0         0       880     12744    0    0  F      0.00
+omplace          18:52:43        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.000      0.000         0         1       876     12748    0    0  F      0.00
+sed              18:52:43        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.004      0.000        10         1       812      5396    0    0         0.00
+omplace          18:52:43        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.000      0.000         0         0       880     12744    0    0  F      0.00
+omplace          18:52:43        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.000      0.000         0         1       880     12748    0    0  F      0.00
+egrep            18:52:43        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.004      0.000        10         0       836      5372    1    0         0.00
+omplace          18:52:43        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.000      0.000         0         0       884     12744    1    0  F      0.00
+omplace          18:52:43        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.000      0.000         0         1       880     12748    0    0  F      0.00
+cut              18:52:43        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.004      0.000        10         1       716      5336    0    0         0.00
+omplace          18:52:43        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.000      0.000         0         0       888     12744    0    0  F      0.00
+omplace          18:52:43        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.000      0.000         0         1       880     12748    0    0  F      0.00
+grep             18:52:43        0.00        0.00        0.00        0.00        0.00        0.00        6.14      0.004      0.000        10         0       828      5524    1    0         0.00
+omplace          18:52:43        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.000      0.000         0         1       880     12748    0    0  F      0.00
+cut              18:52:43        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.004      0.000        10         1       716      5336    0    0         0.00
+omplace          18:52:43        0.00        0.00        0.00        0.00        0.00        0.00       13.09      0.000      0.000         0         0       888     12744    0    0  F      0.00
+omplace          18:52:43        0.00        0.00        0.00        0.00        0.00        0.00       12.97      0.000      0.000         0         1       880     12748    0    0  F      0.00
+cut              18:52:43        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.004      0.000        10         1       716      5336    0    0         0.00
+omplace          18:52:43        0.00        0.00        0.00        0.00        0.00        0.00       13.11      0.000      0.000         0         0       888     12744    0    0  F      0.00
+seq              18:52:43        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.004      0.000         8         1       752      5320    0    0         0.00
+omplace          18:52:43        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.000      0.000         0         0       952     12744    0    0  F      0.00
+omplace          18:52:43        0.03        0.00        0.01        0.00        0.00        0.00        0.00      0.000      0.000        13         1      1072     12748    0    0  F      0.00
+omplace          18:52:43        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.000      0.000         0         1       864     12748    0    0  F      0.00
+wc               18:52:43        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.004      0.000        10         1       772      5320    0    0         0.00
+omplace          18:52:43        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.000      0.000         0         0       868     12744    0    0  F      0.00
+expr             18:52:43        0.00        0.00        0.00        0.00        0.00        0.00        0.02      0.004      0.000         8         1       676      5324    0    0         0.00
+cat              18:52:43        0.01        0.00        0.00        0.00        0.00        0.00        9.51      0.004      0.000        10         2       676      5332    0    0         0.00
+expr             18:52:43        0.00        0.00        0.00        0.00        0.00        0.00       12.89      0.004      0.000         8         1       672      5324    0    0         0.00
+expr             18:52:43        0.00        0.00        0.00        0.00        0.00        0.00        0.02      0.004      0.000         8         1       672      5324    0    0         0.00
+expr             18:52:43        0.00        0.00        0.00        0.00        0.00        0.00       13.27      0.004      0.000         8         1       672      5324    1    0         0.00
+cat              18:52:43        0.01        0.00        0.01        0.00        0.00        0.00        0.00      0.004      0.000        12         2       680      5332    0    0         0.00
+expr             18:52:43        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.004      0.000         8         1       672      5324    0    0         0.00
+omplace          18:52:43        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.000      0.000         0         1      1008     12748    0    0  F      0.00
+lzw              18:52:45        0.29        0.26        0.02        0.00        0.00        0.00      143.51      4.000      0.000         2         0     35808    167604    0    0         0.00
+lzw              18:52:45        0.29        0.27        0.02        0.00        0.00        0.00      144.38      4.000      0.000         2         0     35808    167604    0    0         0.00
+lzw              18:52:45        0.29        0.26        0.02        0.00        0.00        0.00      145.17      4.000      0.000         2         0     35808    167604    0    0         0.00
+lzw              18:52:45        0.40        0.00        0.01        0.00        0.00        0.00        0.04      0.000      0.000         0         0     35808    167604    0    0         0.00
+lzw              18:52:44        1.54        0.24        0.94        0.00        0.23        0.00       52.01      6.572      0.001       618        18     35808    167604    0    0         0.00
+rm               18:52:45        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.004      0.000         8         0       700      5336    0    0         0.00
+omplace          18:52:44        1.62        0.00        0.00        0.00        0.00        0.00       13.94      0.049      0.000        47         1      1660     12744    0    0         0.00
+cpuset           18:52:45        0.00        0.00        0.00        0.00        0.00        0.00       12.99      0.004      0.000         9         1       560      8132    0    0         0.00
+cpuset           18:52:45        0.00        0.00        0.00        0.00        0.00        0.00       13.22      0.008      0.000        30         1       692      8132    0    0         0.00
+expr             18:52:45        0.00        0.00        0.00        0.00        0.00        0.00        0.27      0.004      0.000         8         1       672      5324    0    0         0.00
+omplace          18:52:45        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.000      0.000         0         1       868     12748    0    0  F      0.00
+sed              18:52:45        0.00        0.00        0.00        0.00        0.00        0.00       13.16      0.004      0.000        10         1       816      5396    0    0         0.00
+omplace          18:52:45        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.000      0.000         0         0       880     12744    0    0  F      0.00
+omplace          18:52:45        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.000      0.000         0         1       876     12748    0    0  F      0.00
+sed              18:52:45        0.00        0.00        0.00        0.00        0.00        0.00        0.46      0.004      0.000        10         1       816      5396    0    0         0.00
+omplace          18:52:45        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.000      0.000         0         0       880     12744    0    0  F      0.00
+omplace          18:52:45        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.000      0.000         0         1       880     12748    0    0  F      0.00
+egrep            18:52:45        0.00        0.00        0.00        0.00        0.00        0.00        4.04      0.004      0.000        10         0       836      5372    1    0         0.00
+omplace          18:52:45        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.000      0.000         0         0       884     12744    1    0  F      0.00
+omplace          18:52:45        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.000      0.000         0         1       880     12748    0    0  F      0.00
+cut              18:52:45        0.00        0.00        0.00        0.00        0.00        0.00        3.98      0.004      0.000        10         1       716      5336    0    0         0.00
+omplace          18:52:45        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.000      0.000         0         0       888     12744    0    0  F      0.00
+omplace          18:52:45        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.000      0.000         0         1       880     12748    0    0  F      0.00
+grep             18:52:45        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.004      0.000        10         0       832      5524    1    0         0.00
+omplace          18:52:45        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.000      0.000         0         1       880     12748    0    0  F      0.00
+cut              18:52:45        0.00        0.00        0.00        0.00        0.00        0.00       13.13      0.004      0.000        10         1       720      5336    0    0         0.00
+omplace          18:52:45        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.000      0.000         0         0       888     12744    0    0  F      0.00
+omplace          18:52:45        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.000      0.000         0         1       880     12748    0    0  F      0.00
+cut              18:52:45        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.004      0.000        10         1       720      5336    0    0         0.00
+omplace          18:52:45        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.000      0.000         0         0       888     12744    0    0  F      0.00
+seq              18:52:45        0.00        0.00        0.00        0.00        0.00        0.00        0.02      0.004      0.000         8         1       752      5320    0    0         0.00
+omplace          18:52:45        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.000      0.000         0         0       952     12744    0    0  F      0.00
+omplace          18:52:45        0.03        0.00        0.00        0.00        0.00        0.00       13.21      0.000      0.000        13         1      1072     12748    0    0  F      0.00
+omplace          18:52:45        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.000      0.000         0         1       864     12748    0    0  F      0.00
+wc               18:52:45        0.00        0.00        0.00        0.00        0.00        0.00        0.27      0.004      0.000        10         1       764      5320    0    0         0.00
+omplace          18:52:45        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.000      0.000         0         0       868     12744    0    0  F      0.00
+expr             18:52:45        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.004      0.000         8         1       672      5324    0    0         0.00
+cat              18:52:45        0.01        0.00        0.00        0.00        0.00        0.00       12.80      0.004      0.000        10         2       684      5332    0    0         0.00
+expr             18:52:45        0.00        0.00        0.00        0.00        0.00        0.00        4.24      0.004      0.000         8         1       672      5324    0    0         0.00
+expr             18:52:45        0.00        0.00        0.00        0.00        0.00        0.00       12.98      0.004      0.000         8         1       672      5324    0    0         0.00
+expr             18:52:45        0.00        0.00        0.00        0.00        0.00        0.00        5.82      0.004      0.000         8         1       672      5324    1    0         0.00
+cat              18:52:45        0.01        0.00        0.00        0.00        0.00        0.00       13.01      0.004      0.000        12         2       680      5332    0    0         0.00
+expr             18:52:45        0.00        0.00        0.00        0.00        0.00        0.00        4.36      0.004      0.000         8         1       668      5324    0    0         0.00
+omplace          18:52:45        0.00        0.00        0.00        0.00        0.00        0.00       12.86      0.000      0.000         0         1      1008     12748    0    0  F      0.00
+lzw              18:52:46        0.16        0.15        0.00        0.00        0.00        0.00      293.27      4.000      0.000         2         0     41748    317140    0    0         0.00
+lzw              18:52:46        0.16        0.15        0.01        0.00        0.00        0.00      292.57      4.000      0.000         2         0     41748    317140    0    0         0.00
+lzw              18:52:46        0.16        0.16        0.00        0.00        0.00        0.00      292.57      4.000      0.000         2         0     41748    317140    0    0         0.00
+lzw              18:52:46        0.16        0.14        0.02        0.00        0.00        0.00      292.57      4.000      0.000         2         0     41748    317140    0    0         0.00
+lzw              18:52:46        0.16        0.16        0.00        0.00        0.00        0.00      292.57      3.000      0.000         2         0     41748    317140    0    0         0.00
+lzw              18:52:46        0.16        0.15        0.00        0.00        0.00        0.00      293.27      4.000      0.000         2         0     41748    317140    0    0         0.00
+lzw              18:52:46        0.16        0.16        0.01        0.00        0.00        0.00      291.53      4.000      0.000         2         0     41748    317140    0    0         0.00
+lzw              18:52:46        0.20        0.00        0.01        0.00        0.00        0.00        0.07      0.000      0.000         0         0     41748    317140    0    0         0.00
+lzw              18:52:45        1.13        0.13        0.95        0.00        0.00        0.00       60.92      6.572      0.001       618        30     41748    317140    0    0         0.00
+rm               18:52:46        0.00        0.00        0.00        0.00        0.00        0.00        4.07      0.004      0.000         8         0       704      5336    0    0         0.00
+omplace          18:52:45        1.21        0.01        0.01        0.00        0.00        0.00       13.89      0.049      0.000        47         1      1660     12744    0    0         0.00
+cpuset           18:52:46        0.00        0.00        0.00        0.00        0.00        0.00       12.79      0.004      0.000         9         1       560      8132    0    0         0.00
+cpuset           18:52:46        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.008      0.000        30         1       692      8132    0    0         0.00
+expr             18:52:46        0.00        0.00        0.00        0.00        0.00        0.00        0.32      0.004      0.000         8         1       672      5324    0    0         0.00
+omplace          18:52:46        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.000      0.000         0         1       864     12748    0    0  F      0.00
+sed              18:52:46        0.00        0.00        0.00        0.00        0.00        0.00        0.37      0.004      0.000        10         1       812      5396    0    0         0.00
+omplace          18:52:46        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.000      0.000         0         0       876     12744    0    0  F      0.00
+omplace          18:52:46        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.000      0.000         0         1       872     12748    0    0  F      0.00
+sed              18:52:46        0.00        0.00        0.00        0.00        0.00        0.00        4.29      0.004      0.000        10         1       812      5396    0    0         0.00
+omplace          18:52:46        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.000      0.000         0         0       876     12744    0    0  F      0.00
+omplace          18:52:46        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.000      0.000         0         1       876     12748    0    0  F      0.00
+egrep            18:52:46        0.00        0.00        0.00        0.00        0.00        0.00        6.02      0.004      0.000        10         0       836      5372    1    0         0.00
+omplace          18:52:46        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.000      0.000         0         0       880     12744    1    0  F      0.00
+omplace          18:52:46        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.000      0.000         0         1       876     12748    0    0  F      0.00
+cut              18:52:46        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.004      0.000        10         1       720      5336    0    0         0.00
+omplace          18:52:46        0.00        0.00        0.00        0.00        0.00        0.00       12.82      0.000      0.000         0         0       884     12744    0    0  F      0.00
+omplace          18:52:46        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.000      0.000         0         1       876     12748    0    0  F      0.00
+grep             18:52:46        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.004      0.000        10         0       828      5524    1    0         0.00
+omplace          18:52:46        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.000      0.000         0         1       876     12748    0    0  F      0.00
+cut              18:52:46        0.00        0.00        0.00        0.00        0.00        0.00       13.15      0.004      0.000        10         1       720      5336    0    0         0.00
+omplace          18:52:46        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.000      0.000         0         0       884     12744    0    0  F      0.00
+omplace          18:52:46        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.000      0.000         0         1       876     12748    0    0  F      0.00
+cut              18:52:46        0.00        0.00        0.00        0.00        0.00        0.00        0.39      0.004      0.000        10         1       716      5336    0    0         0.00
+omplace          18:52:46        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.000      0.000         0         0       884     12744    0    0  F      0.00
+seq              18:52:46        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.004      0.000         8         1       756      5320    0    0         0.00
+omplace          18:52:46        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.000      0.000         0         0       948     12744    0    0  F      0.00
+omplace          18:52:46        0.03        0.00        0.01        0.00        0.00        0.00        0.00      0.000      0.000        13         1      1068     12748    0    0  F      0.00
+omplace          18:52:46        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.000      0.000         0         1       860     12748    0    0  F      0.00
+wc               18:52:46        0.00        0.00        0.00        0.00        0.00        0.00        5.90      0.004      0.000        10         1       760      5320    0    0         0.00
+omplace          18:52:46        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.000      0.000         0         0       864     12744    0    0  F      0.00
+expr             18:52:46        0.00        0.00        0.00        0.00        0.00        0.00       12.92      0.004      0.000         8         1       672      5324    0    0         0.00
+cat              18:52:46        0.01        0.00        0.00        0.00        0.00        0.00       13.00      0.004      0.000        10         2       676      5332    0    0         0.00
+expr             18:52:46        0.00        0.00        0.00        0.00        0.00        0.00        4.05      0.004      0.000         8         1       668      5324    0    0         0.00
+expr             18:52:46        0.00        0.00        0.00        0.00        0.00        0.00       12.81      0.004      0.000         8         1       672      5324    0    0         0.00
+expr             18:52:46        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.004      0.000         8         1       668      5324    1    0         0.00
+cat              18:52:46        0.01        0.00        0.01        0.00        0.00        0.00       10.17      0.004      0.000        12         2       680      5332    0    0         0.00
+expr             18:52:46        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.004      0.000         8         1       672      5324    0    0         0.00
+omplace          18:52:46        0.00        0.00        0.01        0.00        0.00        0.00        0.00      0.000      0.000         0         1      1004     12748    0    0  F      0.00
+lzw              18:52:47        0.11        0.09        0.02        0.00        0.00        0.00      394.63      4.000      0.000         2         0     53100    416940    0    0         0.00
+lzw              18:52:47        0.11        0.09        0.01        0.00        0.00        0.00      397.25      4.000      0.000         2         0     53100    416940    0    0         0.00
+lzw              18:52:47        0.12        0.10        0.01        0.00        0.00        0.00      397.25      4.000      0.000         2         0     53100    416940    0    0         0.00
+lzw              18:52:47        0.12        0.10        0.00        0.00        0.00        0.00      396.42      4.000      0.000         2         0     53100    416940    0    0         0.00
+lzw              18:52:47        0.11        0.09        0.01        0.00        0.00        0.00      397.54      4.000      0.000         2         0     53100    416940    0    0         0.00
+lzw              18:52:47        0.12        0.09        0.02        0.00        0.00        0.00      396.42      4.000      0.000         2         0     53100    416940    0    0         0.00
+lzw              18:52:47        0.11        0.10        0.01        0.00        0.00        0.00      396.19      4.000      0.000         2         0     53100    416940    0    0         0.00
+lzw              18:52:47        0.11        0.10        0.01        0.00        0.00        0.00      394.80      4.000      0.000         2         0     53100    416940    0    0         0.00
+lzw              18:52:47        0.11        0.09        0.01        0.00        0.00        0.00      398.10      3.000      0.000         2         0     53100    416940    0    0         0.00
+lzw              18:52:47        0.11        0.08        0.01        0.00        0.00        0.00      399.24      4.000      0.000         2         0     53100    416940    0    0         0.00
+lzw              18:52:47        0.11        0.09        0.00        0.00        0.00        0.00      398.51      3.500      0.000         2         0     53100    416940    0    0         0.00
+lzw              18:52:47        0.11        0.08        0.02        0.00        0.00        0.00      398.07      2.500      0.000         2         0     53100    416940    0    0         0.00
+lzw              18:52:47        0.11        0.09        0.02        0.00        0.00        0.00      397.18      4.000      0.000         2         0     53100    416940    0    0         0.00
+lzw              18:52:47        0.11        0.09        0.01        0.00        0.00        0.00      398.10      4.000      0.000         2         0     53100    416940    0    0         0.00
+lzw              18:52:47        0.11        0.09        0.01        0.00        0.00        0.00      398.51      4.000      0.000         2         0     53100    416940    0    0         0.00
+lzw              18:52:47        0.20        0.00        0.01        0.00        0.00        0.00        0.09      0.000      0.000         0         0     53100    416940    0    0         0.00
+lzw              18:52:46        1.10        0.09        0.92        0.00        0.00        0.00       63.15      6.572      0.002       618        54     53100    416940    0    0         0.00
+rm               18:52:47        0.00        0.00        0.00        0.00        0.00        0.00        4.07      0.004      0.000         8         0       700      5336    0    0         0.00
+omplace          18:52:46        1.18        0.01        0.01        0.00        0.00        0.00       11.41      0.049      0.000        47         1      1656     12744    0    0         0.00
+
+
+Job CSA Accounting - Summary Report
+====================================
+
+Job Accounting File Name         : /tmp/.jacct27efc
+Operating System                 : Linux bl1.psc.teragrid.org 2.6.32.49-0.3-default #1 SMP 2011-12-02 11:28:04 +0100 x86_64
+User Name (ID)                   : nmuthusa (47014)
+Group Name (ID)                  : cc3be2p (14207)
+Project Name (ID)                : ? (0)
+Job ID                           : 0x27efc
+Report Starts                    : 04/29/12 18:52:36
+Report Ends                      : 04/29/12 18:52:47
+Elapsed Time                     :           11      Seconds
+User CPU Time                    :            7.1560 Seconds
+System CPU Time                  :            7.1440 Seconds
+CPU Time Core Memory Integral    :          230.3967 Mbyte-seconds
+CPU Time Virtual Memory Integral :         1447.1713 Mbyte-seconds
+Maximum Core Memory Used         :           51.8555 Mbytes
+Maximum Virtual Memory Used      :          407.1680 Mbytes
+Characters Read                  :          144.0211 Mbytes
+Characters Written               :           48.1289 Mbytes
+Logical I/O Read Requests        :         4603
+Logical I/O Write Requests       :          312
+CPU Delay                        :            0.0206 Seconds
+Block I/O Delay                  :            0.6542 Seconds
+Swap In Delay                    :            0.0000 Seconds
+Number of Commands               :          235
+System Billing Units             :            0.0000
