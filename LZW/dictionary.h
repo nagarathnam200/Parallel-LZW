@@ -12,7 +12,7 @@
 
 #define COUNT 5
 
-#define DICSIZE 5000
+#define DICSIZE 500
 using namespace std;
 
 class dictionary {
@@ -21,9 +21,9 @@ class dictionary {
 
 	public:
 	dictionary();
-	void add(char *key, int value);
+	void add(int *key, int value);
 	void addNum(int value, string key);
-	int retrive(char *key);
+	int retrive(int *key);
 	string retriveStr(int value);
 	long int getCollision();
 	long int getRetEffort();

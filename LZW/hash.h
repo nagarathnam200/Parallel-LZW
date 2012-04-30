@@ -10,14 +10,14 @@
 #include <sys/time.h>
 
 #define COUNT 5
-#define SIZE 50000
+#define SIZE 5000
 using namespace std;
 
 class node{
 
 public:
 
-	char str[30];
+	int str[6];
 
 	int worth;
 
@@ -42,9 +42,9 @@ class hashTable {
 
 	hashTable();
 
-	void add(char *key, int value);
+	void add(int *key, int value);
 	void addNum(int key, string value);
-	int retrive(char *key);
+	int retrive(int *key);
 	string retriveStr(int key);
 	void print();
 	long int getSize();

@@ -7,7 +7,7 @@
 #include "dictionary.h"
 
 #define LOWERA 97
-#define MAXPROCS 16
+#define MAXPROCS 256
 using namespace std;
 
 //dictionary d[MAXPROCS];
@@ -20,13 +20,20 @@ double gettime()
 }
 
 
-vector<int> compressData(char* source, int start, int end, int procs, double* timer, double* rtimer, int* acount, int* rcount) {
+vector<int> compressData(int *source, int start, int end, int procs, double* timer, double* rtimer, int* acount, int* rcount) {
 
 	vector<int> result;
 
 	dictionary di;
 
-	char *temp = (char *) calloc(end, sizeof(char));
+
+	int *temp = (int *) calloc(end+6, sizeof(int));
+
+	if(temp == NULL) {
+	
+		printf("Error allocating Memory\n");
+
+	}
 	
 	int curTemp = 0;
 
@@ -35,6 +42,8 @@ vector<int> compressData(char* source, int start, int end, int procs, double* ti
 	temp[curTemp++] = source[start];
 
 	start+=1;
+
+	
 
 	int count = COUNT;
     int index;
@@ -55,16 +64,15 @@ vector<int> compressData(char* source, int start, int end, int procs, double* ti
 //		s = gettime();
 		index = di.retrive(temp);
 
-//		cout<<endl<<"In the index:"<<index<<" is the string "<<temp;
 //		*rcount = *rcount + 1;
 //		e = gettime();
   //      *rtimer += (e-s);
 
 		if(index == -1) {
 
-//			cout<<endl<<"Added: "<<temp<<" "<<count;
 //			s = gettime();
 			di.add(temp, count);
+
 //			*acount = *acount + 1;
 //			e = gettime();
 //		    *timer += (e-s);
@@ -76,7 +84,10 @@ vector<int> compressData(char* source, int start, int end, int procs, double* ti
 
 			temp = temp + curTemp;
 
+
 			curTemp = 1;
+
+
 			
 		//	temp.erase(temp.begin(),temp.end()-1);
 		//	start++;//------------------>Delete this!!!!!
@@ -88,6 +99,7 @@ vector<int> compressData(char* source, int start, int end, int procs, double* ti
 			if(start == end) {
 //				s = gettime();
 				index = di.retrive(temp);
+
 //				*rcount = *rcount + 1;
 //				e = gettime();
 //			    *rtimer += (e-s);
@@ -104,6 +116,7 @@ vector<int> compressData(char* source, int start, int end, int procs, double* ti
 
 	}
 
+//	free(temp);
 	return result;
 
 }
@@ -165,12 +178,12 @@ int main(int argc, char **argv)
 
 	int countRetrive[MAXPROCS];
 
-	char *data[MAXPROCS];
+	int *data[MAXPROCS];
 
 	#pragma omp parallel for firstprivate(filename, size, numOfProcs) shared(data)
     for(i=0;i<numOfProcs;i++) {
 		
-		data[i] = (char *)malloc(sizeof(char) * ((size/numOfProcs) + 1));
+		data[i] = (int *)malloc(sizeof(int) * ((size/numOfProcs) + 1));
 
         readChunk(data[i], filename, (i+1));
 

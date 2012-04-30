@@ -11,7 +11,7 @@ clean:
 
 lzw: lzw.o dictionary.o util.o lzwDecoder.o hash.o
 	$(CC) $(CFLAGS) lzw.o dictionary.o util.o hash.o -o lzw
-	$(CC) $(CFLAGS) lzwDecoder.o dictionary.o util.o hash.o -o lzwDecoder
+#	$(CC) $(CFLAGS) lzwDecoder.o dictionary.o util.o hash.o -o lzwDecoder
 	$(CC) $(CFLAGS) testDataGenerator.o -o tg
 	$(CC) $(CFLAGS) testDataReader.o -o tr
 lzw.o: lzw.cpp
@@ -22,7 +22,7 @@ hash.o: hash.cpp hashTester.cpp
 	$(CC) $(CFLAGS) $< -c hash.cpp
 util.o: util.cpp
 	$(CC) $(CFLAGS) $< -c util.cpp
-lzwDecoder.o: lzwDecoder.cpp
-	$(CC) $(CFLAGS) $< -c lzwDecoder.cpp
+#lzwDecoder.o: lzwDecoder.cpp
+#	$(CC) $(CFLAGS) $< -c lzwDecoder.cpp
 	$(CC) $(CFLAGS) $< -c testDataGenerator.cpp
 	$(CC) $(CFLAGS) $< -c testDataReader.cpp

@@ -42,9 +42,9 @@ int readChunk(void *dest, char *filename, int chunkNum) {
 
 	long int len = size/procs;
 
-	fseek(fp, (len * (chunkNum-1)), SEEK_CUR);
+	fseek(fp, (len * (chunkNum-1) * sizeof(int)), SEEK_CUR);
 
-	fread(dest, 1, len, fp);
+	fread(dest, sizeof(int), len, fp);
 
 	fclose(fp);
 

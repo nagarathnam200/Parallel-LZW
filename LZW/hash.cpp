@@ -15,7 +15,7 @@
 
 using namespace std;
 
-int cmpare(char *str, int strLen, char *keyP, int keyPlen) {
+int cmpare(int *str, int strLen, int *keyP, int keyPlen) {
 
 	if(strLen != keyPlen) {
 
@@ -43,6 +43,7 @@ int cmpare(char *str, int strLen, char *keyP, int keyPlen) {
 }
 hashTable::hashTable() {
 
+
 	size = 0;
 
 	collision = 0;
@@ -50,16 +51,16 @@ hashTable::hashTable() {
 	getEffort = 0;
 
 }
-void hashTable::add(char *keyP, int value) {
+void hashTable::add(int *keyP, int value) {
 
 	//string key(keyP);
 	int i=0;
 
-	char *tmp = keyP;
+	int *tmp = keyP;
 
 	int len = 0;
 
-	while(tmp[i] != '\0') {
+	while(tmp[i] != 0) {
 
 		i++;
 		len++;
@@ -88,7 +89,7 @@ void hashTable::add(char *keyP, int value) {
 	}
 
 
-	memcpy(dict[pos].str, keyP, len + 1);/*Also copy the null character*/
+	memcpy(dict[pos].str, keyP, (len + 1) * sizeof(int));/*Also copy the null character*/
 	dict[pos].worth = value;
 	dict[pos].len = len;
 
@@ -120,18 +121,18 @@ void hashTable::addNum(int key, string value) {
 
 }
 
-int hashTable::retrive(char *keyP) {
+int hashTable::retrive(int *keyP) {
 
 
 	int i=0;
 
     unsigned int pos = 0;
 
-	char *tmp = keyP;
+	int *tmp = keyP;
 
     int len = 0;
 
-    while(tmp[i] != '\0') {
+    while(tmp[i] != 0) {
 
         i++;
         len++;
@@ -149,7 +150,6 @@ int hashTable::retrive(char *keyP) {
 	int flag = 0;
 
 	int stop = 0;
-
 
 	while(!stop) {
 
@@ -221,7 +221,9 @@ string hashTable::retriveStr(int key) {
 
     if(flag) {
 
-        return decode[pos].str;
+		 return "";
+
+        //return decode[pos].str;
 
     } else {
 

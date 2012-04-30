@@ -2,11 +2,13 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define SIZE 1
+#define SIZE 1024
 
 #define PROCS 2 
 
 #define FACTOR 16
+
+#define ALPHA 4
 
 int main() {
 
@@ -70,11 +72,11 @@ int main() {
 			int j;
 
 			for(j=0; j<SIZE; j++) { //1kB
-				char c = (rand() % 4) + 97;
+				int c = (rand() % ALPHA) + 97;
 				int m = 0;
 				for(m=0; m<6; m++) {
 
-					fwrite(&c, sizeof(char), 1, fp[m]);
+					fwrite(&c, sizeof(int), 1, fp[m]);
 
 				}
 			}
