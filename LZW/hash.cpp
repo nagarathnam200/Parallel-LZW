@@ -15,7 +15,32 @@
 
 using namespace std;
 
+int cmpare(char *str, int strLen, char *keyP, int keyPlen) {
 
+	if(strLen != keyPlen) {
+
+		return 0;
+
+	} else {
+	
+		int i=0;
+		while(i<strLen) {
+
+			if(str[i] != keyP[i]) {
+
+				return 0;
+
+			}
+
+			i++;
+
+		}
+
+		return 1;
+
+	}
+
+}
 hashTable::hashTable() {
 
 	size = 0;
@@ -30,7 +55,17 @@ void hashTable::add(char *keyP, int value) {
 	//string key(keyP);
 	int i=0;
 
-	int len = strlen(keyP);
+	char *tmp = keyP;
+
+	int len = 0;
+
+	while(tmp[i] != '\0') {
+
+		i++;
+		len++;
+
+	}
+
 
 	unsigned int pos = 0;
 
@@ -53,7 +88,7 @@ void hashTable::add(char *keyP, int value) {
 	}
 
 
-	strcpy(dict[pos].str, keyP);
+	memcpy(dict[pos].str, keyP, len + 1);/*Also copy the null character*/
 	dict[pos].worth = value;
 	dict[pos].len = len;
 
@@ -87,11 +122,23 @@ void hashTable::addNum(int key, string value) {
 
 int hashTable::retrive(char *keyP) {
 
+
 	int i=0;
 
     unsigned int pos = 0;
 
-	for(i=0;i<strlen(keyP);i++) {
+	char *tmp = keyP;
+
+    int len = 0;
+
+    while(tmp[i] != '\0') {
+
+        i++;
+        len++;
+
+    }
+
+	for(i=0;i<len;i++) {
 
          pos = (pos << 2) ^ (keyP[i] & 7);
 
@@ -106,11 +153,12 @@ int hashTable::retrive(char *keyP) {
 
 	while(!stop) {
 
+
 		if(dict[pos].len == -1) {
 			stop = 1; continue;
 		}
 
-		if(strcmp(dict[pos].str, keyP) != 0) {
+		if(cmpare(dict[pos].str, dict[pos].len, keyP, len) != 1) {
 		
 			pos = (pos + 1)	% SIZE;	
 
@@ -129,6 +177,7 @@ int hashTable::retrive(char *keyP) {
 	}
 
 	if(flag) {
+
 
 		return dict[pos].worth;
 

@@ -48,7 +48,6 @@ vector<int> compressData(char* source, int start, int end, int procs, double* ti
 //	s = gettime();
 	int prevIndex = di.retrive(temp);
 
-//	cout<<endl<<"Prev Index is: "<<prevIndex;
 //	*rcount = *rcount + 1;
 //	e = gettime();
 //	*rtimer += (e-s);
@@ -199,6 +198,7 @@ int main(int argc, char **argv)
 		int cAdd = 0;
 
 		int cRet = 0;
+
 
 		res[i] = compressData(data[i], 0, (size)/numOfProcs, i, &TimeHashTableAdd, &TimeHashTableRetrive, &cAdd, &cRet);
 

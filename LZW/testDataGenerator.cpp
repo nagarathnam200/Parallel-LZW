@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define SIZE 1024 
+#define SIZE 1
 
 #define PROCS 2 
 
