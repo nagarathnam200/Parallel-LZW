@@ -89,7 +89,8 @@ void hashTable::add(int *keyP, int value) {
 	}
 
 
-	memcpy(dict[pos].str, keyP, (len + 1) * sizeof(int));/*Also copy the null character*/
+//	memcpy(dict[pos].str, keyP, (len + 1) * sizeof(int));/*Also copy the null character*/
+	dict[pos].str = keyP;
 	dict[pos].worth = value;
 	dict[pos].len = len;
 

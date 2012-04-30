@@ -20,14 +20,13 @@ double gettime()
 }
 
 
-vector<int> compressData(int *source, int start, int end, int procs, double* timer, double* rtimer, int* acount, int* rcount) {
+vector<int> compressData(int *source, int start, int end, int procs, double* timer, double* rtimer, int* acount, int* rcount, int *temp) {
 
 	vector<int> result;
 
 	dictionary di;
 
 
-	int *temp = (int *) calloc(end+6, sizeof(int));
 
 	if(temp == NULL) {
 	
@@ -168,17 +167,19 @@ int main(int argc, char **argv)
 
 	double lookup = 0;
 
-	double diffProcs[MAXPROCS];
+//	double diffProcs[MAXPROCS];
 
-	double hashTableTimeAdd[MAXPROCS];
+//	double hashTableTimeAdd[MAXPROCS];
 
-	double hashTableTimeRetrive[MAXPROCS];
+//	double hashTableTimeRetrive[MAXPROCS];
 
-	int countAdd[MAXPROCS];
+//	int countAdd[MAXPROCS];
 
-	int countRetrive[MAXPROCS];
+//	int countRetrive[MAXPROCS];
 
 	int *data[MAXPROCS];
+
+	int *tmp[MAXPROCS];
 
 	#pragma omp parallel for firstprivate(filename, size, numOfProcs) shared(data)
     for(i=0;i<numOfProcs;i++) {
@@ -188,6 +189,8 @@ int main(int argc, char **argv)
         readChunk(data[i], filename, (i+1));
 
         data[i][(size/numOfProcs)] = '\0';
+
+		tmp[i] = (int *)calloc(((size/numOfProcs) + 1),sizeof(int));
 	}
 
 
@@ -213,7 +216,7 @@ int main(int argc, char **argv)
 		int cRet = 0;
 
 
-		res[i] = compressData(data[i], 0, (size)/numOfProcs, i, &TimeHashTableAdd, &TimeHashTableRetrive, &cAdd, &cRet);
+		res[i] = compressData(data[i], 0, (size)/numOfProcs, i, &TimeHashTableAdd, &TimeHashTableRetrive, &cAdd, &cRet, tmp[i]);
 
 //		cout<<endl<<"This proc took: "<<(e-s);
 

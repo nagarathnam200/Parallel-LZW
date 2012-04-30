@@ -17,7 +17,7 @@ class node{
 
 public:
 
-	int str[6];
+	int* str;
 
 	int worth;
 
