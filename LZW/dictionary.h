@@ -21,9 +21,9 @@ class dictionary {
 
 	public:
 	dictionary();
-	void add(int *key, int value);
+	void add(int *key, int value, int len);
 	void addNum(int value, string key);
-	int retrive(int *key);
+	int retrive(int *key, int len);
 	string retriveStr(int value);
 	long int getCollision();
 	long int getRetEffort();

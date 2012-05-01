@@ -42,9 +42,9 @@ class hashTable {
 
 	hashTable();
 
-	void add(int *key, int value);
+	void add(int *key, int value, int len);
 	void addNum(int key, string value);
-	int retrive(int *key);
+	int retrive(int *key, int len);
 	string retriveStr(int key);
 	void print();
 	long int getSize();

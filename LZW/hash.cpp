@@ -17,6 +17,7 @@ using namespace std;
 
 int cmpare(int *str, int strLen, int *keyP, int keyPlen) {
 
+
 	if(strLen != keyPlen) {
 
 		return 0;
@@ -51,22 +52,10 @@ hashTable::hashTable() {
 	getEffort = 0;
 
 }
-void hashTable::add(int *keyP, int value) {
+void hashTable::add(int *keyP, int value, int len) {
 
 	//string key(keyP);
 	int i=0;
-
-	int *tmp = keyP;
-
-	int len = 0;
-
-	while(tmp[i] != 0) {
-
-		i++;
-		len++;
-
-	}
-
 
 	unsigned int pos = 0;
 
@@ -122,23 +111,12 @@ void hashTable::addNum(int key, string value) {
 
 }
 
-int hashTable::retrive(int *keyP) {
+int hashTable::retrive(int *keyP, int len) {
 
 
 	int i=0;
 
     unsigned int pos = 0;
-
-	int *tmp = keyP;
-
-    int len = 0;
-
-    while(tmp[i] != 0) {
-
-        i++;
-        len++;
-
-    }
 
 	for(i=0;i<len;i++) {
 

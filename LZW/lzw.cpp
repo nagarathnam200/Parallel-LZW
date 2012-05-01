@@ -20,25 +20,15 @@ double gettime()
 }
 
 
-vector<int> compressData(int *source, int start, int end, int procs, double* timer, double* rtimer, int* acount, int* rcount, int *temp) {
+vector<int> compressData(int *source, int start, int end, int procs, double* timer, double* rtimer, int* acount, int* rcount) {
 
 	vector<int> result;
 
 	dictionary di;
 
-
-
-	if(temp == NULL) {
 	
-		printf("Error allocating Memory\n");
-
-	}
-	
-	int curTemp = 0;
 
 //	string temp;
-
-	temp[curTemp++] = source[start];
 
 	start+=1;
 
@@ -50,18 +40,19 @@ vector<int> compressData(int *source, int start, int end, int procs, double* tim
 	double e;
 
 	if(start > end) {	//One Corner case
-		result.push_back(di.retrive(temp));
+		result.push_back(di.retrive(source , 1));
 	}
 
 //	s = gettime();
-	int prevIndex = di.retrive(temp);
+	int prevIndex = di.retrive(source, 1);
+	int i = 1;
 
 //	*rcount = *rcount + 1;
 //	e = gettime();
 //	*rtimer += (e-s);
 	while(start <= end) {
 //		s = gettime();
-		index = di.retrive(temp);
+		index = di.retrive(source, i);
 
 //		*rcount = *rcount + 1;
 //		e = gettime();
@@ -70,7 +61,7 @@ vector<int> compressData(int *source, int start, int end, int procs, double* tim
 		if(index == -1) {
 
 //			s = gettime();
-			di.add(temp, count);
+			di.add(source, count,i);
 
 //			*acount = *acount + 1;
 //			e = gettime();
@@ -79,25 +70,21 @@ vector<int> compressData(int *source, int start, int end, int procs, double* tim
 			count++;
 			result.push_back(prevIndex); 
 //			cout<<endl<<d.retrive(temp.substr(0, temp.length()-1));
-			curTemp--;
 
-			temp = temp + curTemp;
+			source = source + (i-1);
 
+			i = 1;
 
-			curTemp = 1;
-
-
-			
 		//	temp.erase(temp.begin(),temp.end()-1);
 		//	start++;//------------------>Delete this!!!!!
 		} else{
-			temp[curTemp++] = source[start];
+			i++;
 			start++;
 			prevIndex = index;
 			
 			if(start == end) {
 //				s = gettime();
-				index = di.retrive(temp);
+				index = di.retrive(source, i);
 
 //				*rcount = *rcount + 1;
 //				e = gettime();
@@ -105,7 +92,7 @@ vector<int> compressData(int *source, int start, int end, int procs, double* tim
 
 				if(index == -1) {
 					result.push_back(prevIndex);
-					result.push_back(temp[curTemp - 1]-LOWERA);
+					result.push_back(source[i - 1]-LOWERA);
 				} else {
 					result.push_back(index);
 				}
@@ -115,7 +102,6 @@ vector<int> compressData(int *source, int start, int end, int procs, double* tim
 
 	}
 
-//	free(temp);
 	return result;
 
 }
@@ -167,7 +153,7 @@ int main(int argc, char **argv)
 
 	double lookup = 0;
 
-//	double diffProcs[MAXPROCS];
+	double diffProcs[MAXPROCS];
 
 //	double hashTableTimeAdd[MAXPROCS];
 
@@ -179,7 +165,7 @@ int main(int argc, char **argv)
 
 	int *data[MAXPROCS];
 
-	int *tmp[MAXPROCS];
+//	int *tmp[MAXPROCS];
 
 	#pragma omp parallel for firstprivate(filename, size, numOfProcs) shared(data)
     for(i=0;i<numOfProcs;i++) {
@@ -190,13 +176,12 @@ int main(int argc, char **argv)
 
         data[i][(size/numOfProcs)] = '\0';
 
-		tmp[i] = (int *)calloc(((size/numOfProcs) + 1),sizeof(int));
 	}
 
 
 	double sComp = gettime();
 
-	#pragma omp parallel for firstprivate(filename, size, numOfProcs) shared(data)
+	#pragma omp parallel for firstprivate(filename, size, numOfProcs) 
 	for(i=0;i<numOfProcs;i++) {
 
 //		hashTableTimeAdd[i] = 0;
@@ -215,8 +200,7 @@ int main(int argc, char **argv)
 
 		int cRet = 0;
 
-
-		res[i] = compressData(data[i], 0, (size)/numOfProcs, i, &TimeHashTableAdd, &TimeHashTableRetrive, &cAdd, &cRet, tmp[i]);
+		res[i] = compressData(data[i], 0, (size)/numOfProcs, i, &TimeHashTableAdd, &TimeHashTableRetrive, &cAdd, &cRet);
 
 //		cout<<endl<<"This proc took: "<<(e-s);
 
@@ -233,6 +217,8 @@ int main(int argc, char **argv)
 	}
 
 	double eComp = gettime();
+	
+
 
     int j;
 
@@ -248,9 +234,17 @@ int main(int argc, char **argv)
 
 //	cout<<endl<<"Collision Details: ";
 
+	double compTime = -1;
+
     for(j=0;j<numOfProcs;j++) {
 
 		elementCount+=res[j].size();
+
+		if(diffProcs[j] > compTime) {
+
+			compTime = diffProcs[j];
+
+		}
 
 //		cout<<endl<<"Time spent on Adding in HashTable in Processor: "<<j<<" "<<hashTableTimeAdd[j];
 

@@ -2,16 +2,18 @@
 
 dictionary::dictionary() {
 
-	int arr[COUNT][2];
+	int *arr[COUNT];
 
 	int i;
 
 	for(i=0;i<COUNT;i++) {
 
+		arr[i] = (int *) malloc(2*sizeof(int));
+
 		arr[i][0] = 97+i;
 		arr[i][1] = 0;
 	
-		ht.add(arr[i], i);
+		ht.add(arr[i], i, 1);
 	}	
 
 //	ht.addNum(0,"a");
@@ -20,10 +22,10 @@ dictionary::dictionary() {
 //	ht.addNum(3,"d");
 //	ht.addNum(4,"e");
 }
-void dictionary::add(int *key, int value) {
+void dictionary::add(int *key, int value, int len) {
 
 	if(ht.getSize() > DICSIZE) return;
-	ht.add(key, value);
+	ht.add(key, value, len);
 
 }
 
@@ -31,10 +33,10 @@ void dictionary::addNum(int key, string value) {
 
 	ht.addNum(key,value);
 }
-int dictionary::retrive(int *key) {
+int dictionary::retrive(int *key, int len) {
 
 //	cout<<endl<<"Retriving Key: "<<key;	
-	return ht.retrive(key);
+	return ht.retrive(key, len);
 
 }
 
