@@ -10,4 +10,4 @@
 #include <sys/time.h>
 
 long int readSize(char *filename);
-int readChunk(void *dest, char *filename, int chunkNum);
+int readChunk(void *dest, char *filename, int chunkNum, int procs);

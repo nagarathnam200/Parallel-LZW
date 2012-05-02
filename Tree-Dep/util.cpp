@@ -12,7 +12,7 @@ long int readSize(char *filename) {
 
 	return size;
 }
-int readChunk(void *dest, char *filename, int chunkNum) {
+int readChunk(void *dest, char *filename, int chunkNum, int procs) {
 
 	FILE *fp;
 
@@ -29,24 +29,19 @@ int readChunk(void *dest, char *filename, int chunkNum) {
 		return 0;
 	}
 
-	int procs = -1;
+	int p;
 
-	fread(&procs, sizeof(int), 1, fp);
+	fread(&p, sizeof(int), 1, fp);
 
-	if((procs == -1) || (procs == 0)) {
+	int numOfBlocks = 2*procs - 1;
 
-		fclose(fp);
-
-		return 0;
-	}
-
-	long int len = size/procs;
+	long int len = size/numOfBlocks;
 
 	fseek(fp, (len * (chunkNum-1) * sizeof(int)), SEEK_CUR);
 
-	fread(dest, sizeof(int), len, fp);
+	int readSize = fread(dest, sizeof(int), len, fp);
 
 	fclose(fp);
 
-	return 1;
+	return readSize;
 }

@@ -10,7 +10,7 @@
 #define MAXPROCS 256
 using namespace std;
 
-//dictionary d[MAXPROCS];
+dictionary d[MAXPROCS];
 
 double gettime()
 {
@@ -22,9 +22,8 @@ double gettime()
 
 vector<int> compressData(int *source, int start, int end, int procs, double* timer, double* rtimer, int* acount, int* rcount) {
 
-	vector<int> result;
 
-	dictionary di;
+	vector<int> result;
 
 	start+=1;
 
@@ -34,49 +33,51 @@ vector<int> compressData(int *source, int start, int end, int procs, double* tim
 	double e;
 
 	if(start > end) {	//One Corner case
-		result.push_back(di.retrive(source , 1));
+		result.push_back(d[procs].retrive(source , 1));
 	}
 
-	int prevIndex = di.retrive(source, 1);
+	int prevIndex = d[procs].retrive(source, 1);
 	int i = 1;
 
-	int lCounter = 0;
-
-	int ind[5];
-
 	while(start <= end) {
+		index = d[procs].retrive(source, i);
 
-		if((start + 3) < end) {
+		if(index == -1) {
 
-			#pragma omp parallel for private(lCounter) shared(di, source, i, ind)
-			for(lCounter = 0; lCounter < 3; lCounter++) {
+			if((procs % 2) == 0) {
 
-				ind[lCounter] = di.retrive(source, i + lCounter);
-			}
+				int tProcs = procs;
 
+				tProcs = tProcs / 2;
 
-			int maxLength = 0;
-			index = -1;
-			for(lCounter = 0; lCounter < 3; lCounter++) {
+				while(tProcs > 0 && index == -1) {
 
-				if(ind[lCounter] > index) {
+					index = d[tProcs].retrive(source, i);
 
-					index = ind[lCounter];
-					maxLength = lCounter;
+					tProcs = tProcs / 2;
 
 				}
 
+			} else {
+
+				int tProcs = procs;
+
+				tProcs = tProcs / 3;
+
+                while(tProcs > 0 && index == -1) {
+
+                    index = d[tProcs].retrive(source, i);
+
+					tProcs = tProcs / 3;
+
+                }
+
 			}
 
-			i = i + maxLength;
-			start = start + maxLength;
-
-
-		} else {
-			index = di.retrive(source, i);
 		}
 		if(index == -1) {
-			di.add(source, count,i);
+
+			d[procs].add(source, count,i);
 			count++;
 			result.push_back(prevIndex); 
 //			cout<<endl<<d.retrive(temp.substr(0, temp.length()-1));
@@ -89,7 +90,7 @@ vector<int> compressData(int *source, int start, int end, int procs, double* tim
 			prevIndex = index;
 			
 			if(start == end) {
-				index = di.retrive(source, i);
+				index = d[procs].retrive(source, i);
 				if(index == -1) {
 					result.push_back(prevIndex);
 					result.push_back(source[i - 1]-LOWERA);
@@ -115,8 +116,7 @@ int main(int argc, char **argv)
 	char filename[30];
 
 	char outfile[30] = "out";
-
-	omp_set_nested(1);	
+	
 
 	while((opt = getopt(argc, argv, "p:i:o:")) != -1) {
 		switch(opt) {
@@ -124,7 +124,7 @@ int main(int argc, char **argv)
 			case 'p':
 				{
 					numOfProcs = atoi(optarg);
-					omp_set_num_threads(numOfProcs*4);
+					omp_set_num_threads(numOfProcs);
 					break;
 				}
 			case 'i':
@@ -146,7 +146,7 @@ int main(int argc, char **argv)
 
 	int i;
 
-	vector<int> res[MAXPROCS];
+	vector<int> res[(2*MAXPROCS - 1)];
 
 	double start = gettime();
 
@@ -164,26 +164,37 @@ int main(int argc, char **argv)
 
 //	int countRetrive[MAXPROCS];
 
-	int *data[MAXPROCS];
+	int *data[(2*MAXPROCS - 1)];
+	int dataSize[(2*MAXPROCS - 1)];
+
+	char *flag;
+
+	flag = (char *) calloc((2*MAXPROCS - 1),  sizeof(char));
+
+	flag[0] = 1;
 
 //	int *tmp[MAXPROCS];
 
-	#pragma omp parallel for firstprivate(filename, size, numOfProcs) shared(data)
-    for(i=0;i<numOfProcs;i++) {
+	int numBlocks = (2*numOfProcs - 1 );
+
+	#pragma omp parallel for firstprivate(filename, size, numBlocks, numOfProcs) shared(data)
+    for(i=1;i<=numBlocks;i++) {
 		
-		data[i] = (int *)malloc(sizeof(int) * ((size/numOfProcs) + 1));
+		data[i] = (int *)malloc(sizeof(int) * ((size/numBlocks) + 1));
 
-        readChunk(data[i], filename, (i+1));
+        int readSize = readChunk(data[i], filename, (i), numOfProcs);
 
-        data[i][(size/numOfProcs)] = '\0';
+        data[i][(readSize)] = '\0';
+		
+		dataSize[i] = readSize;
 
 	}
 
 
 	double sComp = gettime();
 
-	#pragma omp parallel for firstprivate(filename, size, numOfProcs) 
-	for(i=0;i<numOfProcs;i++) {
+	#pragma omp parallel for firstprivate(filename, size, numOfProcs, dataSize, data) shared(res) 
+	for(i=1;i<=numOfProcs;i++) {
 
 //		hashTableTimeAdd[i] = 0;
 
@@ -201,7 +212,24 @@ int main(int argc, char **argv)
 
 		int cRet = 0;
 
-		res[i] = compressData(data[i], 0, (size)/numOfProcs, i, &TimeHashTableAdd, &TimeHashTableRetrive, &cAdd, &cRet);
+		int curBlock = (i * 2 - 1);
+
+
+		int endCond = 2*numOfProcs - 1;
+
+		while(curBlock <= endCond) {
+
+			while(!flag[curBlock]);
+
+			res[curBlock] = compressData(data[curBlock], 0, dataSize[curBlock], i, &TimeHashTableAdd, &TimeHashTableRetrive, &cAdd, &cRet);
+
+			flag[2*curBlock] = 1;
+
+			curBlock = curBlock * 2;
+
+			flag[2*curBlock + 1] = 1;
+
+		} 
 
 //		cout<<endl<<"This proc took: "<<(e-s);
 
@@ -237,7 +265,7 @@ int main(int argc, char **argv)
 
 	double compTime = -1;
 
-    for(j=0;j<numOfProcs;j++) {
+    for(j=1;j<=numBlocks;j++) {
 
 		elementCount+=res[j].size();
 
@@ -269,7 +297,7 @@ int main(int argc, char **argv)
 
 			fwrite(&c1, sizeof(int), 1, fp);
 
-//			printf("%d ",c1);
+//		printf("%d ",c1);
 
         }
 

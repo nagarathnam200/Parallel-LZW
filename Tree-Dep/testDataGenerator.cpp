@@ -35,9 +35,23 @@ int main() {
 
 	int count = 0;
 
+	long int s[7];
+
+	int pr[7] = {1,2,4,8,16,32,64};
+
 	for(count = 0; count < 7; count++) {
 
-		fwrite(&size, sizeof(long int), 1, fp[count]);
+		int temp;
+
+		pr[count] = 2* pr[count] - 1;
+
+		temp = size / pr[count];
+
+		s[count] = pr[count] * temp;
+
+		printf("\nSize is : %ld",s[count]);
+
+		fwrite(&s[count], sizeof(long int), 1, fp[count]);
 
 		
 
@@ -71,23 +85,18 @@ int main() {
 
 
 	int k = 0;
-	for(k=0; k<FACTOR; k++) {//50 MB
-		for(i=0; i<SIZE; i++) {// 1MB
-		
-			int j;
-
-			for(j=0; j<SIZE; j++) { //1kB
-				int c = (rand() % ALPHA) + 97;
 				int m = 0;
 				for(m=0; m<7; m++) {
 
-					fwrite(&c, sizeof(int), 1, fp[m]);
+					for(i=0; i < s[m]; i++) {
+
+						int c = (rand() % ALPHA) + 97;
+
+						fwrite(&c, sizeof(int), 1, fp[m]);
+
+					}
 
 				}
-			}
-		}
-	}
-	int m = 0;
     for(m=0; m<7; m++) {
 		fclose(fp[m]);
 	}
