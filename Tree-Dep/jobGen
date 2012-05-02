@@ -10,8 +10,8 @@ ja
 
 cd $SCRATCH
 
-cp $HOME/15418/Parallel-LZW/LZW/lzw .
-cp $HOME/15418/Parallel-LZW/LZW/tg .
+cp $HOME/15418/Parallel-LZW/Tree-Dep/lzw .
+cp $HOME/15418/Parallel-LZW/Tree-Dep/tg .
 
 ./tg
 

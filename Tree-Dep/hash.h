@@ -9,7 +9,7 @@
 #include <fcntl.h>
 #include <sys/time.h>
 
-#define SIZE 100000
+#define SIZE 50000
 using namespace std;
 
 class node{

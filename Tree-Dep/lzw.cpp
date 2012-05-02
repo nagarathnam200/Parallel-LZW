@@ -40,8 +40,41 @@ vector<int> compressData(int *source, int start, int end, int procs, double* tim
 	int prevIndex = di.retrive(source, 1);
 	int i = 1;
 
+	int lCounter = 0;
+
+	int ind[5];
+
 	while(start <= end) {
-		index = di.retrive(source, i);
+
+		if((start + 3) < end) {
+
+			#pragma omp parallel for private(lCounter) shared(di, source, i, ind)
+			for(lCounter = 0; lCounter < 3; lCounter++) {
+
+				ind[lCounter] = di.retrive(source, i + lCounter);
+			}
+
+
+			int maxLength = 0;
+			index = -1;
+			for(lCounter = 0; lCounter < 3; lCounter++) {
+
+				if(ind[lCounter] > index) {
+
+					index = ind[lCounter];
+					maxLength = lCounter;
+
+				}
+
+			}
+
+			i = i + maxLength;
+			start = start + maxLength;
+
+
+		} else {
+			index = di.retrive(source, i);
+		}
 		if(index == -1) {
 			di.add(source, count,i);
 			count++;
@@ -82,7 +115,8 @@ int main(int argc, char **argv)
 	char filename[30];
 
 	char outfile[30] = "out";
-	
+
+	omp_set_nested(1);	
 
 	while((opt = getopt(argc, argv, "p:i:o:")) != -1) {
 		switch(opt) {
@@ -90,7 +124,7 @@ int main(int argc, char **argv)
 			case 'p':
 				{
 					numOfProcs = atoi(optarg);
-					omp_set_num_threads(numOfProcs);
+					omp_set_num_threads(numOfProcs*4);
 					break;
 				}
 			case 'i':
@@ -235,7 +269,7 @@ int main(int argc, char **argv)
 
 			fwrite(&c1, sizeof(int), 1, fp);
 
-	//		printf("%d ",c1);
+//			printf("%d ",c1);
 
         }
 
@@ -243,7 +277,7 @@ int main(int argc, char **argv)
 
 		fwrite(&c, sizeof(int), 1, fp);
 
-	//	printf("%d ",c);
+//		printf("%d ",c);
 
     }
 

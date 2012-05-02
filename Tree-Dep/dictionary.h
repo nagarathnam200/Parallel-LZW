@@ -10,9 +10,9 @@
 #include <sys/time.h>
 #include "hash.h"
 
-#define COUNT 8 
+#define COUNT 4 
 
-#define DICSIZE 10000
+#define DICSIZE 5000
 using namespace std;
 
 class dictionary {

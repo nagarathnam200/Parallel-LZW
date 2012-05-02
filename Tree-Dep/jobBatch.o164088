@@ -1,0 +1,19 @@
+module: Command not found.
+ja
+cd /brashear/nmuthusa
+cp /usr/users/4/nmuthusa/15418/Parallel-LZW/Tree-Dep/lzw .
+cp /usr/users/4/nmuthusa/15418/Parallel-LZW/Tree-Dep/tg .
+./tg
+setenv OMP_NUM_THREADS 64
+omplace -nt 64 ./lzw -p 1 -i testData1
+
+Total Number of Procs: 1
+The total Time taken is : 130.334
+The Computation Time is: 29.3264
+The Element Count is: 2975969omplace -nt 64 ./lzw -p 2 -i testData2
+
+Total Number of Procs: 2
+The total Time taken is : 359.49
+The Computation Time is: 310.876
+The Element Count is: 2975929omplace -nt 64 ./lzw -p 4 -i testData4
+=>> PBS: job killed: walltime 645 exceeded limit 600
