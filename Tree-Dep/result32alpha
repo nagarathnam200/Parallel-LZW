@@ -1,0 +1,46 @@
+module: Command not found.
+ja
+csa_ctl failure, command='csa_jastart'
+   System Error(13): Permission denied.
+An error was returned from the call to the 'csa_jastart' routine.
+An error was returned from the call to the 'acctctl()' routine.
+   System Error(13): Permission denied.
+cd /brashear/nmuthusa
+cp /usr/users/4/nmuthusa/15418/Parallel-LZW/Tree-Dep/lzw .
+cp /usr/users/4/nmuthusa/15418/Parallel-LZW/Tree-Dep/tg .
+./tg
+
+Size is : 16777216
+Size is : 16777215
+Size is : 16777215
+Size is : 16777215
+Size is : 16777200
+Size is : 16777215
+Size is : 16777208setenv OMP_NUM_THREADS 16
+omplace -nt 16 ./lzw -p 1 -i testData1
+
+Total Number of Procs: 1
+The total Time taken is : 199.713
+The Computation Time is: 196.641
+The Element Count is: 7952598omplace -nt 16 ./lzw -p 2 -i testData2
+
+Total Number of Procs: 2
+The total Time taken is : 136.742
+The Computation Time is: 134.74
+The Element Count is: 7826487omplace -nt 16 ./lzw -p 4 -i testData4
+
+Total Number of Procs: 4
+The total Time taken is : 121.134
+The Computation Time is: 112.296
+The Element Count is: 7672161omplace -nt 16 ./lzw -p 8 -i testData8
+
+Total Number of Procs: 8
+The total Time taken is : 81.5452
+The Computation Time is: 71.7305
+The Element Count is: 7548855omplace -nt 16 ./lzw -p 16 -i testData16
+
+Total Number of Procs: 16
+The total Time taken is : 68.0969
+The Computation Time is: 52.5051
+The Element Count is: 7386015ja -chlst
+The job accounting file is empty or does not exist.
