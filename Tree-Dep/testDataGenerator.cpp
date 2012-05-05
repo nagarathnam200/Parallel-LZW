@@ -8,7 +8,7 @@
 
 #define FACTOR 16
 
-#define ALPHA 64 
+#define ALPHA 256 
 
 int main() {
 

@@ -10,7 +10,7 @@
 #include <sys/time.h>
 #include "hash.h"
 
-#define COUNT 64 
+#define COUNT 256 
 
 #define DICSIZE 5000
 using namespace std;
