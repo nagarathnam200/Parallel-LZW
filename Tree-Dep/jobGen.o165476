@@ -1,0 +1,15 @@
+module: Command not found.
+ja
+cd /brashear/nmuthusa
+cp /usr/users/4/nmuthusa/15418/Parallel-LZW/Tree-Dep/lzw .
+cp: cannot stat `/usr/users/4/nmuthusa/15418/Parallel-LZW/Tree-Dep/lzw': No such file or directory
+cp /usr/users/4/nmuthusa/15418/Parallel-LZW/Tree-Dep/tg .
+./tg
+
+Size is : 33554432
+Size is : 33554430
+Size is : 33554430
+Size is : 33554430
+Size is : 33554431setenv OMP_NUM_THREADS 16
+omplace -nt 16 ./lzw -p 1 -i testData1
+=>> PBS: job killed: walltime 262 exceeded limit 240

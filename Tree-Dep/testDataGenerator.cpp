@@ -6,7 +6,7 @@
 
 #define PROCS 2 
 
-#define FACTOR 32 
+#define FACTOR 64 
 
 #define ALPHA 256 
 
@@ -101,9 +101,9 @@ int main() {
 
 					for(i=0; i < s[m]; i++) {
 
-						int c = buf[i];
+						unsigned int c = buf[i];
 
-				//		int c = rand();
+				//		unsigned int c = rand();
 
 						c = c % ALPHA; 
 
