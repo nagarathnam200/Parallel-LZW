@@ -39,7 +39,10 @@ vector<int> compressData(int *source, int start, int end, int procs, double* tim
 	int prevIndex = d[procs].retrive(source, 1);
 	int i = 1;
 
+//	cout<<endl<<"Start is : "<<start<<"End is :"<<end<<endl;
+
 	while(start <= end) {
+	
 		index = d[procs].retrive(source, i);
 
 		if(index == -1) {
@@ -79,7 +82,9 @@ vector<int> compressData(int *source, int start, int end, int procs, double* tim
 
 			d[procs].add(source, count,i);
 			count++;
-			result.push_back(prevIndex); 
+			result.push_back(prevIndex);
+
+//			cout<<endl<<"Start..."<<start; 
 //			cout<<endl<<d.retrive(temp.substr(0, temp.length()-1));
 			source = source + (i-1);
 
@@ -93,7 +98,7 @@ vector<int> compressData(int *source, int start, int end, int procs, double* tim
 				index = d[procs].retrive(source, i);
 				if(index == -1) {
 					result.push_back(prevIndex);
-					result.push_back(source[i - 1]-LOWERA);
+					result.push_back(source[i - 1]);
 				} else {
 					result.push_back(index);
 				}
@@ -221,6 +226,8 @@ int main(int argc, char **argv)
 
 			while(!flag[curBlock]);
 
+//			cout<<endl<<"Strating Chunk: "<<curBlock<<"In Processor: "<<i<<endl;
+
 			res[curBlock] = compressData(data[curBlock], 0, dataSize[curBlock], i, &TimeHashTableAdd, &TimeHashTableRetrive, &cAdd, &cRet);
 
 			flag[2*curBlock] = 1;
@@ -291,19 +298,19 @@ int main(int argc, char **argv)
 
 //		cout<<endl<<"Number of Entries in hash Table: "<<d[j].getSize();
 
-        for(i=0;i<res[j].size();i++) {
+//        for(i=0;i<res[j].size();i++) {
 
-			int c1 = res[j][i];
+//			int c1 = res[j][i];
 
-			fwrite(&c1, sizeof(int), 1, fp);
+//			fwrite(&c1, sizeof(int), 1, fp);
 
 //		printf("%d ",c1);
 
-        }
+  //      }
 
-		int c = -1;
+	//	int c = -1;
 
-		fwrite(&c, sizeof(int), 1, fp);
+//		fwrite(&c, sizeof(int), 1, fp);
 
 //		printf("%d ",c);
 
@@ -315,6 +322,14 @@ int main(int argc, char **argv)
 	cout<<endl<<"The total Time taken is : "<<end - start;
 	cout<<endl<<"The Computation Time is: "<<eComp - sComp;
 	cout<<endl<<"The Element Count is: "<<elementCount;
+
+	long int retEffort = 0;
+	for(i=1;i<=numOfProcs;i++) {
+
+			retEffort += d[i].getRetEffort();
+	}
+
+	cout<<endl<<"The Net amount of effort on retrivals: "<<retEffort;
 	
 	fclose(fp);
 }

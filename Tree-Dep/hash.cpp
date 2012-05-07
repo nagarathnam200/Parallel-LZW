@@ -10,9 +10,9 @@
 #include <sys/time.h>
 #include "hash.h"
 
-#define MAGIC 9999
-
 using namespace std;
+
+inline unsigned int hashVal(int *str, int len);
 
 int cmpare(int *str, int strLen, int *keyP, int keyPlen) {
 
@@ -58,13 +58,9 @@ void hashTable::add(int *keyP, int value, int len) {
 
 	unsigned int pos = 0;
 
-	for(i=0;i<len;i++) {
-	
-		 pos = (pos << 2) ^ (keyP[i]);
+	pos = hashVal(keyP, len);
 
-	}
-
-    pos = (pos * i) % SIZE;
+    pos = (pos) % SIZE;
 
 //	collision++;
 
@@ -72,7 +68,7 @@ void hashTable::add(int *keyP, int value, int len) {
 
 		pos = (pos + 1) % SIZE;
 
-//		collision++;
+		collision++;
 
 	}
 
@@ -117,13 +113,9 @@ int hashTable::retrive(int *keyP, int len) {
 
     unsigned int pos = 0;
 
-	for(i=0;i<len;i++) {
+	pos = hashVal(keyP, len);
 
-         pos = (pos << 2) ^ (keyP[i]);
-
-    }
-
-    pos = (pos * i) % SIZE;
+    pos = (pos) % SIZE;
 
 	int flag = 0;
 
@@ -223,5 +215,26 @@ long int hashTable::getCollision() {
 long int hashTable::getRetEffort() {
 
 	return getEffort;
+
+}
+inline unsigned int hashVal(int *str, int len) {
+
+	unsigned int hash = 0;
+	int i;
+
+	for (i=0; i<len; i++)
+	{
+		if ((i & 1) == 0)
+		{
+			hash ^= ((hash << 7) ^ (str[i]) ^ (hash >> 3));
+		}
+		else
+		{
+			hash ^= (~((hash << 11) ^ (str[i]) ^ (hash >> 5)));
+		}
+	}
+
+	return (hash & 0x7FFFFFFF);
+
 
 }

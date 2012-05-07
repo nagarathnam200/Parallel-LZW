@@ -6,11 +6,11 @@ dictionary::dictionary() {
 
 	int i;
 
-	for(i=0;i<COUNT;i++) {
+	for(i=1;i<COUNT;i++) {
 
 		arr[i] = (int *) malloc(2*sizeof(int));
 
-		arr[i][0] = 97+i;
+		arr[i][0] = i;
 		arr[i][1] = 0;
 	
 		ht.add(arr[i], i, 1);

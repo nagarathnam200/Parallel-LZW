@@ -1,6 +1,6 @@
 #!/bin/csh
 #PBS -l ncpus=16
-#PBS -l walltime=15:00
+#PBS -l walltime=4:00
 #PBS -j oe
 #PBS -q debug
 

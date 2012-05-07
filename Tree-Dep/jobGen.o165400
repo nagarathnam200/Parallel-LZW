@@ -1,0 +1,16 @@
+module: Command not found.
+ja
+cd /brashear/nmuthusa
+cp /usr/users/4/nmuthusa/15418/Parallel-LZW/Tree-Dep/lzw .
+cp /usr/users/4/nmuthusa/15418/Parallel-LZW/Tree-Dep/tg .
+./tg
+
+Size is : 16777216
+Size is : 16777215
+Size is : 16777215
+Size is : 16777215
+Size is : 16777200
+Size is : 16777215
+Size is : 16777208setenv OMP_NUM_THREADS 16
+omplace -nt 16 ./lzw -p 1 -i testData1
+=>> PBS: job killed: walltime 271 exceeded limit 240
